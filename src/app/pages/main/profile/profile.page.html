@@ -1,0 +1,44 @@
+<ion-header [translucent]="true"></ion-header>
+
+<br>
+<br>
+<br>
+
+<ion-content [fullscreen]="true" class="black-background">
+  <ion-header collapse="condense">
+    <ion-toolbar class="black-background" >
+      <ion-title size="large" class="white-text">Tu Perfil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="profile-card">
+    <div class="image-container">
+      <img alt="Profile Picture" src="https://media-lax3-1.cdn.whatsapp.net/v/t61.24694-24/437162496_8165993850104063_1319002744493556268_n.jpg?ccb=11-4&oh=01_Q5AaIOb5h9XcYrH2Jx_NkoqU5QpArPiPxcJYvnBqDFgSSAdm&oe=6703334A&_nc_sid=5e03e0&_nc_cat=105" />
+    </div>
+  </ion-card>
+  
+  
+  <ion-tabs>
+    <ion-tab-bar slot="Inicio">
+      <ion-tab-button >
+        <ion-icon routerLink="/home" name="home"></ion-icon>
+        Inicio
+      </ion-tab-button>
+      <ion-tab-button >
+        <ion-icon routerLink="/classlist" name="barbell"></ion-icon>
+        Rutinas
+      </ion-tab-button>
+      <ion-tab-button  >
+        <ion-icon routerLink="/payment" name="reader"></ion-icon>
+        Plan
+      </ion-tab-button>
+      <ion-tab-button >
+        <ion-icon routerLink="/profile" name="person"></ion-icon>
+        Perfil
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  
+</ion-content>
+
+
