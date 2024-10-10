@@ -63,14 +63,14 @@ export class AuthPage implements OnInit {
 
       let path = `users/${uid}`;
 
-      this.firebaseSvc.getDocument(path).then((user) => {     // user: user
+      this.firebaseSvc.getDocument(path).then((user: User) => {     // user: user
 
         this.utilsSvc.saveInLocalStorage('user', user);
         this.utilsSvc.routerLink('/main/home');
         this.form.reset();
 
         this.utilsSvc.presentToast({
-          message: `Bienvenido`,
+          message: `Bienvenido ${user.name}`,
           duration: 1500,
           color: 'primary',
           position: 'middle',

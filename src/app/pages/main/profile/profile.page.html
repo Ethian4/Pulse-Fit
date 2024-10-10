@@ -11,13 +11,10 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card class="profile-card">
-    <div class="image-container">
-      <img alt="Profile Picture" src="https://media-lax3-1.cdn.whatsapp.net/v/t61.24694-24/437162496_8165993850104063_1319002744493556268_n.jpg?ccb=11-4&oh=01_Q5AaIOb5h9XcYrH2Jx_NkoqU5QpArPiPxcJYvnBqDFgSSAdm&oe=6703334A&_nc_sid=5e03e0&_nc_cat=105" />
-    </div>
-  </ion-card>
   
+
   
+
   <ion-tabs>
     <ion-tab-bar slot="Inicio">
       <ion-tab-button routerLink="/main/home" >
@@ -37,6 +34,10 @@
         Perfil
       </ion-tab-button>
     </ion-tab-bar>
+
+    <ion-button (click)="signOut()">
+      Click me
+    </ion-button>
   </ion-tabs>
   
 </ion-content>

@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, up
 import { User } from '../models/user.model';
 import { AngularFirestore} from '@angular/fire/compat/firestore';
 import { getFirestore, setDoc, doc, getDoc} from '@angular/fire/firestore';
+import { UtilsService } from './utils.service';
 
 
 @Injectable({
@@ -13,10 +14,12 @@ export class FirebaseService {
 
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
-
+  utilsSvc = inject(UtilsService);
 
   // AUTENTICACION
-
+  getAuth(){
+    return getAuth();
+  }
 
   // ACCEDER
   signIn(user: User) {
@@ -33,6 +36,14 @@ export class FirebaseService {
     return updateProfile(getAuth().currentUser, { displayName });
   }
 
+  //CERRAR SESION
+  signOut(){
+    getAuth().signOut();
+    localStorage.removeItem('user');
+    this.utilsSvc.routerLink('/auth');
+  }
+
+
   //BASE DE DATOS
 
 
@@ -43,7 +54,7 @@ export class FirebaseService {
 
   //OBTENER DOCUMENTO
   async getDocument(path: string){
-    return (await getDoc(doc(getFirestore(),path))).data;
+    return (await getDoc(doc(getFirestore(),path))).data();
   }
 
 }

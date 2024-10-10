@@ -35,7 +35,7 @@ export class UtilsService {
   }
 
   //Obtener cosas del localstorage
-  getFromLocalStorage(key: string,) {
+  getFromLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
 
