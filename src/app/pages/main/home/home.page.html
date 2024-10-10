@@ -1,42 +1,28 @@
-<ion-header [translucent]="true"></ion-header>
+<ion-content class="ion-padding-top ion-text-center">
 
-<br>
-<br>
+  <h1>Home</h1>
 
-<ion-content [fullscreen]="true" class="black-background">
-  <ion-text class="white-text">
-    <h1 class="white-text"><strong>Hola, Usuario </strong></h1>
-  </ion-text>
-
-  <ion-card>
-    <ion-card-header class="gray-background">
-      <ion-progress-bar value=".92" buffer=".45"></ion-progress-bar> <ion-progress-bar ></ion-progress-bar>
-      <ion-card-subtitle class="white-text">Progreso</ion-card-subtitle>
-      <ion-card-title class="white-text">92%</ion-card-title>
-    </ion-card-header>
-  </ion-card>
- 
+  <ion-tabs>
+    <ion-tab-bar slot="Inicio">
+      <ion-tab-button routerLink="/main/home" >
+        <ion-icon name="home"></ion-icon>
+        Inicio
+      </ion-tab-button>
+      <ion-tab-button  routerLink="/main/classlist" >
+        <ion-icon  name="barbell"></ion-icon>
+        Rutinas
+      </ion-tab-button>
+      <ion-tab-button routerLink="/main/payment" >
+        <ion-icon  name="reader"></ion-icon>
+        Plan
+      </ion-tab-button>
+      <ion-tab-button routerLink="/main/profile">
+        <ion-icon  name="person"></ion-icon>
+        Perfil
+      </ion-tab-button>
+    </ion-tab-bar>
   
-<ion-tabs>
-  <ion-tab-bar slot="Inicio">
-    <ion-tab-button routerLink="/main/home" >
-      <ion-icon name="home"></ion-icon>
-      Inicio
-    </ion-tab-button>
-    <ion-tab-button  routerLink="/main/classlist" >
-      <ion-icon  name="barbell"></ion-icon>
-      Rutinas
-    </ion-tab-button>
-    <ion-tab-button routerLink="/main/payment" >
-      <ion-icon  name="reader"></ion-icon>
-      Plan
-    </ion-tab-button>
-    <ion-tab-button routerLink="/main/profile">
-      <ion-icon  name="person"></ion-icon>
-      Perfil
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
   
-</ion-content>
-
+  </ion-tabs>
+  
+  </ion-content>

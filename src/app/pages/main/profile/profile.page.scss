@@ -1,16 +1,25 @@
-.white-text {
-    color: #ffffff;
+
+
+  ion-avatar{
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
+
+  .photo-btn{
+    position: relative;
+    bottom: 25px;
+  }
+
+  h2{
+    margin-bottom: 0;
+  }
+
+  ion-item{
+    --padding-top: 15px;
   }
   
-  .black-background {
-    --background: #121212;
-  }
-
-  .gray-background {
-    --background: #212121;
-  }
-
-  ion-progress-bar {
-    --background: #121212;
-    --progress-background: #09c567;
+  .empty-icon{
+    font-size: 140px;
+    opacity: 30%;
   }

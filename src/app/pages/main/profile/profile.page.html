@@ -1,45 +1,71 @@
-<ion-header [translucent]="true"></ion-header>
+<ion-content class="ion-padding-top ion-text-center">
+
+<ion-avatar >
+  <img *ngIf="user()?.image" [src]="user()?.image" />
+
+  <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
+</ion-avatar>
 
 <br>
 <br>
-<br>
 
-<ion-content [fullscreen]="true" class="black-background">
-  <ion-header collapse="condense">
-    <ion-toolbar class="black-background" >
-      <ion-title size="large" class="white-text">Tu Perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-item button class="photo-btn" (click)="takeImage()" >
+  <ion-icon name="camera-outline"></ion-icon>
+</ion-item>
 
-  
 
-  
 
-  <ion-tabs>
-    <ion-tab-bar slot="Inicio">
-      <ion-tab-button routerLink="/main/home" >
-        <ion-icon name="home"></ion-icon>
-        Inicio
-      </ion-tab-button>
-      <ion-tab-button  routerLink="/main/classlist" >
-        <ion-icon  name="barbell"></ion-icon>
-        Rutinas
-      </ion-tab-button>
-      <ion-tab-button routerLink="/main/payment" >
-        <ion-icon  name="reader"></ion-icon>
-        Plan
-      </ion-tab-button>
-      <ion-tab-button routerLink="/main/profile">
-        <ion-icon  name="person"></ion-icon>
-        Perfil
-      </ion-tab-button>
-    </ion-tab-bar>
+<h2>{{user().name}}</h2>
+<div>Gym Bro</div>
 
-    <ion-button (click)="signOut()">
-      Click me
-    </ion-button>
-  </ion-tabs>
-  
+<ion-item button detail>
+  <ion-icon color="primary" slot="start" name="person-outline"></ion-icon>
+  <ion-label>Datos Personales</ion-label>
+</ion-item>
+
+<ion-item button detail>
+  <ion-icon color="primary" slot="start" name="cash-outline"></ion-icon>
+  <ion-label>Metodos de Pago</ion-label>
+</ion-item>
+
+<ion-item button detail>
+  <ion-icon color="primary" slot="start" name="ticket-outline"></ion-icon>
+  <ion-label>Datos de Facturacion</ion-label>
+</ion-item>
+
+<ion-item button detail>
+  <ion-icon color="primary" slot="start" name="settings-outline"></ion-icon>
+  <ion-label>Configuracion</ion-label>
+</ion-item>
+
+<ion-item (click)="signOut()">
+  <ion-icon color="primary" slot="start" name="exit-outline"></ion-icon>
+  <ion-label>Cerrra Sesion</ion-label>
+</ion-item>
+
+
+
+<ion-tabs>
+  <ion-tab-bar slot="Inicio">
+    <ion-tab-button routerLink="/main/home" >
+      <ion-icon name="home"></ion-icon>
+      Inicio
+    </ion-tab-button>
+    <ion-tab-button  routerLink="/main/classlist" >
+      <ion-icon  name="barbell"></ion-icon>
+      Rutinas
+    </ion-tab-button>
+    <ion-tab-button routerLink="/main/payment" >
+      <ion-icon  name="reader"></ion-icon>
+      Plan
+    </ion-tab-button>
+    <ion-tab-button routerLink="/main/profile">
+      <ion-icon  name="person"></ion-icon>
+      Perfil
+    </ion-tab-button>
+  </ion-tab-bar>
+
+
+</ion-tabs>
+
 </ion-content>
-
-
