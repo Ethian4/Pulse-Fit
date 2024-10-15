@@ -1,28 +1,66 @@
 <ion-content class="ion-padding-top ion-text-center">
 
-  <h1>Clases</h1>
+  <h1>Rutinas</h1>
 
-  <ion-tabs>
-    <ion-tab-bar slot="Inicio">
-      <ion-tab-button routerLink="/main/home" >
+
+  <!-- RUTINAS-->
+  <ion-list>
+    <ion-item-sliding class="rutina-item" *ngFor="let r of Rutinas">
+      <ion-item>
+        <ion-label>
+          <div class="name">{{r.name}}</div>
+        </ion-label>
+      </ion-item>
+
+      
+      <!-- OPCIONES PARA BORRAR Y EDITAR-->
+
+
+      <ion-item-options (click)="addUpdateRutinas(r)">
+        <ion-item-option>
+          <ion-icon  class="option-btn" name="create-outline"></ion-icon>
+        </ion-item-option>
+  
+        <ion-item-option (click)="deleteRutina(r)" color="danger">
+          <ion-icon class="option-btn" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+
+    </ion-item-sliding>
+  </ion-list>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+    <ion-fab-button (click)="addUpdateRutinas()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--
+
+   <ion-tabs>
+    <ion-tab-bar>
+      <ion-tab-button  routerLink="/main/home">
         <ion-icon name="home"></ion-icon>
-        Inicio
+        <ion-label>Inicio</ion-label>
       </ion-tab-button>
-      <ion-tab-button  routerLink="/main/classlist" >
-        <ion-icon  name="barbell"></ion-icon>
-        Rutinas
+  
+      <ion-tab-button routerLink="/main/classlist">
+        <ion-icon name="barbell"></ion-icon>
+        <ion-label>Rutinas</ion-label>
       </ion-tab-button>
-      <ion-tab-button routerLink="/main/payment" >
-        <ion-icon  name="reader"></ion-icon>
-        Plan
+  
+      <ion-tab-button routerLink="/main/payment">
+        <ion-icon name="reader"></ion-icon>
+        <ion-label>Plan</ion-label>
       </ion-tab-button>
+  
       <ion-tab-button routerLink="/main/profile">
-        <ion-icon  name="person"></ion-icon>
-        Perfil
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Perfil</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
-  
-  
   </ion-tabs>
+  -->
   
   </ion-content>

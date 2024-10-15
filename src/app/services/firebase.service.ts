@@ -3,10 +3,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from '@firebase/auth';
 import { User } from '../models/user.model';
 import { AngularFirestore} from '@angular/fire/compat/firestore';
-import { getFirestore, setDoc, doc, getDoc, addDoc, collection, collectionData, query, updateDoc} from '@angular/fire/firestore';
+import { getFirestore, setDoc, doc, getDoc, addDoc, collection, collectionData, query, updateDoc, deleteDoc} from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { getStorage, uploadString, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, uploadString, ref, getDownloadURL, deleteObject } from "firebase/storage";
 
 
 @Injectable({
@@ -39,6 +39,8 @@ export class FirebaseService {
     return updateProfile(getAuth().currentUser, { displayName });
   }
 
+  
+
   //CERRAR SESION
   signOut(){
     getAuth().signOut();
@@ -54,18 +56,24 @@ export class FirebaseService {
     return updateDoc(doc(getFirestore(), path), data);
   }
 
+    //BORRAR DOCUMENTO
+    deleteDocument(path: string){
+      return deleteDoc(doc(getFirestore(), path));
+    }
+
 
 
   //OBTENER DOCUMENTO DE COLECCION
   getCollectionData(path: string, collectionQuery?: any){
     const ref = collection(getFirestore(), path);
-    return collectionData(query(ref, collectionQuery));
+    return collectionData(query(ref, collectionQuery), {idField:'id'});  //OBTENR EL ID
   }
 
   //SETEAR DOCUMENTOS
   setDocument(path: string, data: any){
     return setDoc(doc(getFirestore(),path),data);
   }
+
 
   //OBTENER DOCUMENTO
   async getDocument(path: string){
@@ -79,9 +87,16 @@ export class FirebaseService {
 
 
   //ALMACENAMIENTO
+
+  //IMAGEN
   async uploadImage(path: string, data_url: string){
     return uploadString(ref(getStorage(), path),data_url, 'data_url').then(() =>{
       return getDownloadURL(ref(getStorage(), path) )
     })
+  }
+
+  //ELIMINAR ARCHIVO
+  deleteFile(path: string){
+    return deleteObject(ref(getStorage(), path))
   }
 }
