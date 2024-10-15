@@ -16,7 +16,7 @@ export class AddUpdateRutinasComponent  implements OnInit {
 
   form = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
     nota: new FormControl(''),
     rutinaInfo: new FormControl(''),
 

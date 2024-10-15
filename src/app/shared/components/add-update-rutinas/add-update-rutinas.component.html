@@ -1,31 +1,37 @@
-<app-header [isModal]="true" [title]="Rutina? 'Actualizar Rutina' :  'Agregar Rutina'"></app-header>
+<app-header [isModal]="true" [title]="Rutina? 'Editar Rutina' :  'Agregar Rutina'"></app-header>
 <ion-content>
 
-    <form [formGroup]="form" class="ion-no-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
+    <form [formGroup]="form" class="ion-no-padding ion-text-center auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
 
         <!-- NAME -->
-        <app-custom-input autocomplete="name" [control]="form.controls.name" type="text"
+        <app-custom-input  autocomplete="name" [control]="form.controls.name" type="text"
             label="Nombre"></app-custom-input>
 
-        <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
-            <div *ngIf="form.controls.name.errors?.['required']">El correo es requerido</div>
-            <div *ngIf="form.controls.name.errors?.['minlenght']">El nombre debe de tener 4 letras</div>
-        </div>
 
         <!-- Nota -->
         <app-custom-input  [control]="form.controls.nota" type="text"
             label="Nota"></app-custom-input>
 
 
+            <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+                <ion-fab-button>
+                  <ion-icon name="add"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
 
         <!-- BOTON -->
-        <ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
-            {{Rutina? 'Actualizar Rutina' :  'Agregar Rutina'}}
-            <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
-        </ion-button> 
-
-
-
+        <div class="boton-container">
+            <ion-button 
+            
+              expand="block" 
+              mode="ios" 
+              class="ion-margin" 
+              type="submit" 
+              [disabled]="form.invalid">
+              {{Rutina ? 'Editar Rutina' : 'Agregar Rutina'}}
+              <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+            </ion-button>
+          </div>
 
 
     </form>
