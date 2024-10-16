@@ -1,3 +1,26 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <ion-tabs>
+    <ion-tab-bar>
+      <ion-tab-button  routerLink="/main/home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button routerLink="/main/classlist">
+        <ion-icon name="barbell"></ion-icon>
+        <ion-label>Rutinas</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button routerLink="/main/payment">
+        <ion-icon name="reader"></ion-icon>
+        <ion-label>Plan</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button routerLink="/main/profile">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>

@@ -1,39 +1,46 @@
-<app-header [isModal]="true" [title]="Rutina? 'Editar Rutina' :  'Agregar Rutina'"></app-header>
+<app-header [isModal]="true" [title]="Rutina? 'Actualizar Rutina' :  'Agregar Rutina'"></app-header>
 <ion-content>
 
-    <form [formGroup]="form" class="ion-no-padding ion-text-center auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+  <form [formGroup]="form" class="ion-no-padding ion-text-center auth-form" (ngSubmit)="submit()"
+    (keypress.enter)="submit()">
 
-        <!-- NAME -->
-        <app-custom-input  autocomplete="name" [control]="form.controls.name" type="text"
-            label="Nombre"></app-custom-input>
+    <!-- NAME -->
+    <app-custom-input autocomplete="name" [control]="form.controls.name" type="text" label="Nombre"></app-custom-input>
 
-
-        <!-- Nota -->
-        <app-custom-input  [control]="form.controls.nota" type="text"
-            label="Nota"></app-custom-input>
+    <!-- Nota -->
+    <app-custom-input [control]="form.controls.nota" type="text" label="Nota"></app-custom-input>
 
 
-            <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
-                <ion-fab-button>
-                  <ion-icon name="add"></ion-icon>
-                </ion-fab-button>
-              </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+      <ion-fab-button (click)="agregarEjercicio()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 
-        <!-- BOTON -->
-        <div class="boton-container">
-            <ion-button 
-            
-              expand="block" 
-              mode="ios" 
-              class="ion-margin" 
-              type="submit" 
-              [disabled]="form.invalid">
-              {{Rutina ? 'Editar Rutina' : 'Agregar Rutina'}}
-              <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
-            </ion-button>
-          </div>
+<!-- EJERCICIO LISTA -->
+<ion-list>
+  <ion-item-sliding class="rutina-item" *ngFor="let e of Ejercicios" >
+    <ion-item>
+      <ion-label>
+        <div class="name">{{ e.nameE }}</div>
+        <div>Peso: {{ e.pesoE }} kg</div>
+        <div>Tiempo: {{ e.tiempoE }} min</div>
+        <div>Repeticiones: {{ e.repeticionesE }}</div>
+      </ion-label>
+    </ion-item>
+  </ion-item-sliding>
+</ion-list>
 
 
-    </form>
+    <!-- BOTON -->
+    <div class="boton-container">
+      <ion-button expand="block" mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
+        {{Rutina ? 'Editar Rutina' : 'Agregar Rutina'}}
+        <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+
+  </form>
 
 </ion-content>

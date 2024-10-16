@@ -84,7 +84,6 @@ export class ClasslistPage implements OnInit {
 
 
 
-
   //Agregar Rutina
   async addUpdateRutinas(Rutina?: Rutinas) {
 
