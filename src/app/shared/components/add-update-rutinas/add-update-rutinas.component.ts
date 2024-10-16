@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, Input } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular'; // Importación del AlertController
 import { Ejercicios } from 'src/app/models/ejercicios.model';
@@ -12,21 +13,28 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './add-update-rutinas.component.html',
   styleUrls: ['./add-update-rutinas.component.scss'],
 })
+
+
+
 export class AddUpdateRutinasComponent implements OnInit {
   @Input() Rutina: Rutinas;
 
   form = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
     nota: new FormControl(''),
   });
 
+
+
+  firestore = inject(AngularFirestore);
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
-  alertCtrl = inject(AlertController); // Inyectar AlertController
+  alertCtrl = inject(AlertController); 
 
   user = {} as User;
-  Ejercicios: Ejercicios[] = []; // Lista de ejercicios para la rutina actual
+  Ejercicios: Ejercicios[] = []; 
+  
 
   ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
@@ -36,17 +44,24 @@ export class AddUpdateRutinasComponent implements OnInit {
     }
   }
 
-  getEjercicios() {
-    const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`;
-    this.firebaseSvc.getCollectionData(path).subscribe({
-      next: (res: any) => {
-        this.Ejercicios = res;
-      },
-      error: (err) => console.error('Error al obtener ejercicios:', err),
-    });
+
+  generateId(): string {
+    return this.firestore.createId(); // Crea un ID único
   }
 
-  
+
+  //OBTENER LAS RUTINAS 
+  getEjercicios() {
+    let path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`
+
+    let sub = this.firebaseSvc.getCollectionData(path).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.Ejercicios = res;
+        sub.unsubscribe();
+      } 
+    })
+  }
 
   submit() {
     if (this.form.valid) {
@@ -55,9 +70,6 @@ export class AddUpdateRutinasComponent implements OnInit {
     }
   }
 
-
-  
-  
   // CREAR RUTINA
   async createRutina() {
     const path = `users/${this.user.uid}/Rutinas`;
@@ -93,7 +105,7 @@ export class AddUpdateRutinasComponent implements OnInit {
     });
   }
 
-  // Abrir alerta para agregar un ejercicio manualmente
+  //CREAR EJERCICIOS
   async agregarEjercicio() {
     if (!this.Rutina || !this.Rutina.id) {
       this.utilsSvc.presentToast({
@@ -146,44 +158,6 @@ export class AddUpdateRutinasComponent implements OnInit {
     await alert.present();
   }
 
-  // Guardar ejercicio en la subcolección
-  async guardarEjercicio(data: { nameE: string; pesoE: number; tiempoE: number; repeticionesE: string; }) {
-    const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`;
-
-    const nuevoEjercicio: Ejercicios = {
-      nameE: data.nameE,
-      pesoE: data.pesoE,
-      tiempoE: data.tiempoE,
-      repeticionesE: data.repeticionesE,
-    };
-
-    const loading = await this.utilsSvc.loading();
-    await loading.present();
-
-    try {
-      await this.firebaseSvc.addDocument(path, nuevoEjercicio);
-
-      this.utilsSvc.presentToast({
-        message: 'Ejercicio agregado exitosamente.',
-        duration: 1500,
-        color: 'success',
-        position: 'middle',
-        icon: 'checkmark-circle-outline',
-      });
-    } catch (error) {
-      console.error(error);
-      this.utilsSvc.presentToast({
-        message: 'Error al agregar ejercicio.',
-        duration: 2500,
-        color: 'danger',
-        position: 'middle',
-        icon: 'alert-circle-outline',
-      });
-    } finally {
-      loading.dismiss();
-    }
-  }
-
   // ACTUALIZAR RUTINA
   async updateRutina() {
     const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}`;
@@ -216,4 +190,101 @@ export class AddUpdateRutinasComponent implements OnInit {
       loading.dismiss();
     });
   }
+
+
+  // GUARDAR EL EJERCICIO
+async guardarEjercicio(data: { nameE: string; pesoE: number; tiempoE: number; repeticionesE: string; }) {
+  const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`;
+
+  const nuevoEjercicio: Ejercicios = {
+    id: this.generateId(), // Genera un ID único
+    nameE: data.nameE,
+    pesoE: data.pesoE,
+    tiempoE: data.tiempoE,
+    repeticionesE: data.repeticionesE,
+  };
+
+
+
+  const loading = await this.utilsSvc.loading();
+  await loading.present();
+
+  delete this.form.value.id;
+
+  try {
+    // Agrega el ejercicio a Firebase
+    await this.firebaseSvc.addDocument(path, nuevoEjercicio);
+    
+    // Actualiza la lista local de ejercicios
+    this.Ejercicios.push(nuevoEjercicio);
+
+    this.utilsSvc.presentToast({
+      message: 'Ejercicio agregado exitosamente.',
+      duration: 1500,
+      color: 'success',
+      position: 'middle',
+      icon: 'checkmark-circle-outline',
+    });
+  } catch (error) {
+    console.error(error);
+    this.utilsSvc.presentToast({
+      message: 'Error al agregar ejercicio.',
+      duration: 2500,
+      color: 'danger',
+      position: 'middle',
+      icon: 'alert-circle-outline',
+    });
+  } finally {
+    loading.dismiss();
+  }
 }
+
+
+    // ELIMINAR EJERCICIO
+    async deleteEjercicio(Ejercicio: Ejercicios) {
+
+      let path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios/${Ejercicio.id}`
+  
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
+  
+  
+      this.firebaseSvc.deleteDocument(path).then(async res => {
+  
+        this.Ejercicios = this.Ejercicios.filter(e => e.id !== Ejercicio.id);
+   
+        this.utilsSvc.presentToast({
+          message: 'Rutina Eliminada Exitosamente',
+          duration: 1500,
+          color: 'success',
+          position: 'middle',
+          icon: 'checkmark-circle-outline'
+  
+        })
+  
+      }).catch(error => {
+        console.log(error);
+  
+        this.utilsSvc.presentToast({
+          message: error.message,
+          duration: 2500,
+          color: 'primary',
+          position: 'middle',
+          icon: 'alert-circle-outline'
+  
+        })
+  
+      }).finally(() => {
+        loading.dismiss();
+      })
+  
+    }
+
+
+
+
+
+
+}
+
+

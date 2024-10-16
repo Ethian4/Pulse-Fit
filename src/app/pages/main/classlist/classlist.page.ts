@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Injectable  } from '@angular/core';
 import { Rutinas } from 'src/app/models/rutinas.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -95,9 +95,5 @@ export class ClasslistPage implements OnInit {
 
     if (success) this.getRutinas();
   }
-
-
-
-
 
 }

@@ -1,4 +1,5 @@
 export interface Ejercicios{
+    id: string,
     nameE: string,
     pesoE: number,
     tiempoE: number,

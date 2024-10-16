@@ -57,11 +57,13 @@ export class FirebaseService {
   }
 
     //BORRAR DOCUMENTO
-    deleteDocument(path: string){
-      return deleteDoc(doc(getFirestore(), path));
+    deleteDocument(path: string) {
+      return this.firestore.doc(path).delete(); // Usa AngularFirestore para eliminar
     }
 
-
+    generateId(): string {
+      return this.firestore.createId(); // Crea un ID único
+    }
 
   //OBTENER DOCUMENTO DE COLECCION
   getCollectionData(path: string, collectionQuery?: any){
