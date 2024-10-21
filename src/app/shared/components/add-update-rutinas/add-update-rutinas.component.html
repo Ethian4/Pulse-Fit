@@ -1,6 +1,5 @@
 <app-header [isModal]="true" [title]="Rutina ? 'Actualizar Rutina' : 'Agregar Rutina'"></app-header>
 <ion-content>
-
   <form [formGroup]="form" class="ion-no-padding ion-text-center auth-form" (ngSubmit)="submit()"
     (keypress.enter)="submit()">
 
@@ -10,6 +9,9 @@
     <!-- Nota -->
     <app-custom-input [control]="form.controls.nota" type="text" label="Nota"></app-custom-input>
 
+   
+
+    
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
       <ion-fab-button (click)="agregarEjercicio()">
         <ion-icon name="add"></ion-icon>
@@ -18,7 +20,7 @@
 
     <!-- EJERCICIO LISTA -->
     <ion-list>
-      <ion-item-sliding class="rutina-item" *ngFor="let e of Ejercicios">
+      <ion-item-sliding class="rutina-item" *ngFor="let e of Ejercicios; trackBy: trackByFn">
         <ion-item>
           <ion-label>
             <div class="name">{{ e.nameE }}</div>
@@ -26,6 +28,7 @@
             <div>Tiempo: {{ e.tiempoE }} min</div>
             <div>Repeticiones: {{ e.repeticionesE }}</div>
           </ion-label>
+          <ion-checkbox slot="start" [checked]="e.checkedE" (ionChange)="updateCheckedState(e, $event.detail.checked)"></ion-checkbox>
           <ion-button color="danger" (click)="deleteEjercicio(e)">
             <ion-icon name="trash"></ion-icon>
           </ion-button>
@@ -40,7 +43,5 @@
         <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
       </ion-button>
     </div>
-
   </form>
-
 </ion-content>

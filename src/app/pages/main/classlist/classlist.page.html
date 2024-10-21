@@ -1,41 +1,41 @@
 <ion-content class="ion-padding-top ion-text-center">
-
   <h1>Rutinas</h1>
 
-  
-
-  <!-- RUTINAS-->
+  <!-- LISTA DE RUTINAS -->
   <ion-list>
-    <ion-item-sliding class="rutina-item" *ngFor="let r of Rutinas">
+    <ion-item-sliding class="rutina-item" *ngFor="let r of Rutinas; let i = index">
       <ion-item>
-        <ion-label (click)= "addUpdateRutinas(r)">
-          <div class="name">{{r.name}}</div>
+        <ion-label (click)="addUpdateRutinas(r)" class="ion-text-start">
+          <div class="name">
+            <span class="alphabet-label">{{ getAlphabetLetter(i) }}.</span>
+            {{ r.name }}
+          </div>
         </ion-label>
+
+        <!-- Checkbox al lado derecho -->
+        <ion-checkbox 
+          slot="end" 
+          [(ngModel)]="r.checked" 
+          (ionChange)="onCheckboxChange(r)">
+        </ion-checkbox>
       </ion-item>
 
-      
-      <!-- OPCIONES PARA BORRAR Y EDITAR-->
-
-
+      <!-- OPCIONES PARA BORRAR Y EDITAR -->
       <ion-item-options>
         <ion-item-option (click)="addUpdateRutinas(r)">
-          <ion-icon  class="option-btn" name="create-outline"></ion-icon>
+          <ion-icon class="option-btn" name="create-outline"></ion-icon>
         </ion-item-option>
-  
+
         <ion-item-option (click)="deleteRutina(r)" color="danger">
           <ion-icon class="option-btn" name="trash-outline"></ion-icon>
         </ion-item-option>
       </ion-item-options>
-
-
     </ion-item-sliding>
   </ion-list>
-  
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
     <ion-fab-button (click)="addUpdateRutinas()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  
-  </ion-content>
+</ion-content>

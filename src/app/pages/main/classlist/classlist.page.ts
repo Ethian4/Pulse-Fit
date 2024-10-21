@@ -81,8 +81,36 @@ export class ClasslistPage implements OnInit {
     })
 
   }
+  
+ // ACTUALIZAR EL ESTADO DEL CHECKBOX EN FIREBASE
+ async onCheckboxChange(rutina: Rutinas) {
+  console.log(`Estado de ${rutina.name}: ${rutina.checked}`);
+
+  let path = `users/${this.user().uid}/Rutinas/${rutina.id}`;
 
 
+  // Actualizar el estado del checkbox en Firebase
+  try {
+    await this.firebaseSvc.updateDocument(path, { checked: rutina.checked });
+
+  } catch (error) {
+    console.error('Error al actualizar el estado:', error);
+    this.utilsSvc.presentToast({
+      message: error.message,
+      duration: 2500,
+      color: 'danger',
+      position: 'middle',
+      icon: 'alert-circle-outline'
+    });
+  } finally {
+  }
+}
+
+
+  getAlphabetLetter(index: number): string {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return alphabet[index % alphabet.length];
+  }
 
   //Agregar Rutina
   async addUpdateRutinas(Rutina?: Rutinas) {
@@ -95,5 +123,7 @@ export class ClasslistPage implements OnInit {
 
     if (success) this.getRutinas();
   }
+
+  
 
 }

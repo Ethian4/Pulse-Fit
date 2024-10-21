@@ -21,8 +21,10 @@ export class AddUpdateRutinasComponent implements OnInit {
 
   form = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     nota: new FormControl(''),
+    checked: new FormControl(false), // Checkbox para el estado de la rutina
+    date: new FormControl(new Date().toISOString().slice(0, 10), [Validators.required]) // Campo de fecha
   });
 
 
@@ -39,11 +41,18 @@ export class AddUpdateRutinasComponent implements OnInit {
   ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
     if (this.Rutina) {
-      this.form.setValue(this.Rutina);
-      this.getEjercicios(); // Obtener ejercicios si ya existe la rutina
+      this.form.setValue({
+        id: this.Rutina.id || '',
+        name: this.Rutina.name || '',
+        nota: this.Rutina.nota || '',
+        checked: this.Rutina.checked || false,
+        date: this.Rutina.date || new Date().toISOString().slice(0, 10), // Establece la fecha de la rutina
+      });
+      this.getEjercicios();
     }
   }
 
+  
 
   generateId(): string {
     return this.firestore.createId(); // Crea un ID único
@@ -52,15 +61,13 @@ export class AddUpdateRutinasComponent implements OnInit {
 
   //OBTENER LAS RUTINAS 
   getEjercicios() {
-    let path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`
-
-    let sub = this.firebaseSvc.getCollectionData(path).subscribe({
+    const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`;
+    this.firebaseSvc.getCollectionData(path).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.Ejercicios = res;
-        sub.unsubscribe();
-      } 
-    })
+      },
+      error: (err) => console.error('Error al obtener ejercicios:', err),
+    });
   }
 
   submit() {
@@ -141,7 +148,6 @@ export class AddUpdateRutinasComponent implements OnInit {
           type: 'text',
           placeholder: 'Repeticiones',
         },
-        
       ],
       buttons: [
         {
@@ -193,98 +199,112 @@ export class AddUpdateRutinasComponent implements OnInit {
 
 
   // GUARDAR EL EJERCICIO
-async guardarEjercicio(data: { nameE: string; pesoE: number; tiempoE: number; repeticionesE: string; }) {
-  const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`;
+  async guardarEjercicio(data: { nameE: string; pesoE: number; tiempoE: number; repeticionesE: string; }) {
+    const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios`;
 
-  const nuevoEjercicio: Ejercicios = {
-    id: this.generateId(), // Genera un ID único
-    nameE: data.nameE,
-    pesoE: data.pesoE,
-    tiempoE: data.tiempoE,
-    repeticionesE: data.repeticionesE,
-  };
+    const nuevoEjercicio: Ejercicios = {
+      id: this.generateId(), // Genera un ID único
+      nameE: data.nameE,
+      pesoE: data.pesoE,
+      tiempoE: data.tiempoE,
+      repeticionesE: data.repeticionesE,
+      checkedE: false,
+    };
 
+    const loading = await this.utilsSvc.loading();
+    await loading.present();
 
+    delete this.form.value.id;
 
-  const loading = await this.utilsSvc.loading();
-  await loading.present();
+    try {
+      // Agrega el ejercicio a Firebase
+      await this.firebaseSvc.addDocument(path, nuevoEjercicio);
+      
+      // Actualiza la lista local de ejercicios
+      this.Ejercicios.push(nuevoEjercicio);
 
-  delete this.form.value.id;
-
-  try {
-    // Agrega el ejercicio a Firebase
-    await this.firebaseSvc.addDocument(path, nuevoEjercicio);
-    
-    // Actualiza la lista local de ejercicios
-    this.Ejercicios.push(nuevoEjercicio);
-
-    this.utilsSvc.presentToast({
-      message: 'Ejercicio agregado exitosamente.',
-      duration: 1500,
-      color: 'success',
-      position: 'middle',
-      icon: 'checkmark-circle-outline',
-    });
-  } catch (error) {
-    console.error(error);
-    this.utilsSvc.presentToast({
-      message: 'Error al agregar ejercicio.',
-      duration: 2500,
-      color: 'danger',
-      position: 'middle',
-      icon: 'alert-circle-outline',
-    });
-  } finally {
-    loading.dismiss();
+      this.utilsSvc.presentToast({
+        message: 'Ejercicio agregado exitosamente.',
+        duration: 1500,
+        color: 'success',
+        position: 'middle',
+        icon: 'checkmark-circle-outline',
+      });
+    } catch (error) {
+      console.error(error);
+      this.utilsSvc.presentToast({
+        message: 'Error al agregar ejercicio.',
+        duration: 2500,
+        color: 'danger',
+        position: 'middle',
+        icon: 'alert-circle-outline',
+      });
+    } finally {
+      loading.dismiss();
+    }
+    this.form.reset();
   }
+
+trackByFn(index: number, item: Ejercicios) {
+  return item.id; // o cualquier propiedad única
 }
+
 
 
     // ELIMINAR EJERCICIO
     async deleteEjercicio(Ejercicio: Ejercicios) {
-
-      let path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios/${Ejercicio.id}`
+      let path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios/${Ejercicio.id}`;
   
       const loading = await this.utilsSvc.loading();
       await loading.present();
   
-  
       this.firebaseSvc.deleteDocument(path).then(async res => {
-  
         this.Ejercicios = this.Ejercicios.filter(e => e.id !== Ejercicio.id);
-   
+  
         this.utilsSvc.presentToast({
           message: 'Rutina Eliminada Exitosamente',
           duration: 1500,
           color: 'success',
           position: 'middle',
           icon: 'checkmark-circle-outline'
-  
-        })
-  
+        });
       }).catch(error => {
         console.log(error);
-  
         this.utilsSvc.presentToast({
           message: error.message,
           duration: 2500,
           color: 'primary',
           position: 'middle',
           icon: 'alert-circle-outline'
-  
-        })
-  
+        });
       }).finally(() => {
         loading.dismiss();
-      })
-  
+      });
     }
 
+    
 
 
 
-
-
-}
+    async updateCheckedState(ejercicio: Ejercicios, isChecked: boolean) {
+      const path = `users/${this.user.uid}/Rutinas/${this.Rutina.id}/Ejercicios/${ejercicio.id}`;
+  
+      try {
+        // Actualiza el estado checkedE en Firebase
+        await this.firebaseSvc.updateDocument(path, { checkedE: isChecked });
+        // Actualiza la propiedad local para reflejar el cambio en la UI
+        ejercicio.checkedE = isChecked;
+      } catch (error) {
+        console.error(error);
+        this.utilsSvc.presentToast({
+          message: 'Error al actualizar el estado del ejercicio.',
+          duration: 2500,
+          color: 'danger',
+          position: 'middle',
+          icon: 'alert-circle-outline',
+        });
+      }
+    }
+  }
 
 
