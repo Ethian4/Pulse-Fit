@@ -1,7 +1,7 @@
-import { Component, inject, OnInit, Input } from '@angular/core';
+import { Component, inject, OnInit, Input, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular'; // Importación del AlertController
+import { AlertController, IonModal } from '@ionic/angular'; // Importación del AlertController
 import { Ejercicios } from 'src/app/models/ejercicios.model';
 import { Rutinas } from 'src/app/models/rutinas.model';
 import { User } from 'src/app/models/user.model';
@@ -16,8 +16,10 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 
 
+
 export class AddUpdateRutinasComponent implements OnInit {
   @Input() Rutina: Rutinas;
+  @ViewChild('datePicker', { static: true }) datePicker: IonModal;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -242,7 +244,6 @@ export class AddUpdateRutinasComponent implements OnInit {
     } finally {
       loading.dismiss();
     }
-    this.form.reset();
   }
 
 trackByFn(index: number, item: Ejercicios) {
@@ -283,7 +284,19 @@ trackByFn(index: number, item: Ejercicios) {
     }
 
     
-
+    async openDatePicker() {
+      await this.datePicker.present();
+    }
+  
+    async closeDatePicker() {
+      await this.datePicker.dismiss();
+    }
+  
+    setDate(event: any) {
+      const selectedDate = new Date(event.detail.value).toISOString().split('T')[0]; // Guardar solo la fecha (YYYY-MM-DD)
+      this.form.get('date')?.setValue(selectedDate);
+      this.closeDatePicker();
+    }
 
 
     async updateCheckedState(ejercicio: Ejercicios, isChecked: boolean) {

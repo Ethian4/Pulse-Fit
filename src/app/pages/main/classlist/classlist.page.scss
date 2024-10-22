@@ -36,5 +36,50 @@
     --size: 20px; /* Ajusta el tamaño del checkbox */
   }
   
+  .calendar {
+    background-color: #5a5a5a; // Establece el color de fondo
+    color: rgb(255, 255, 255); // Cambia el color del texto a blanco para mejorar la visibilidad
+    border-radius: 8px; // Opcional: añade bordes redondeados
+    padding: 15px; // Opcional: añade padding interno
+  
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+  
+    .calendar-body {
+      display: flex;
+      justify-content: space-between;
+      color: rgb(0, 0, 0); // Cambia el color del texto a blanco
+    }
+  
+    .calendar-day {
+      text-align: center;
+      flex: 1;
+      padding: 10px; // Opcional: añade padding a cada día
+    }
+  
+    .day-number {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+      color: white; // Cambia el color del número del día a blanco
+    }
+  
+    .routine-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black; // Color de fondo de los círculos
+      &.active {
+        background-color: #71A71A; // Cambia el color si hay rutina
+      }
+    }
+  }
+  
+  
   
   

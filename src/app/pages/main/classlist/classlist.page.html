@@ -1,6 +1,21 @@
 <ion-content class="ion-padding-top ion-text-center">
   <h1>Rutinas</h1>
 
+  <!-- CALENDARIO SEMANAL -->
+  <div class="calendar">
+    <div class="calendar-header">
+      <div class="header-item" *ngFor="let day of weekDays">{{ day.label }}</div>
+    </div>
+    <div class="calendar-body">
+      <div class="calendar-day" *ngFor="let day of weekDays; let i = index">
+        <div class="day-number">{{ day.date | date: 'd' }}</div>
+        <div class="routine-circle" [ngClass]="{'active': hasRoutine(i)}">
+          <strong>{{ getRoutineLetter(i) }} </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- LISTA DE RUTINAS -->
   <ion-list>
     <ion-item-sliding class="rutina-item" *ngFor="let r of Rutinas; let i = index">
@@ -11,21 +26,13 @@
             {{ r.name }}
           </div>
         </ion-label>
-
-        <!-- Checkbox al lado derecho -->
-        <ion-checkbox 
-          slot="end" 
-          [(ngModel)]="r.checked" 
-          (ionChange)="onCheckboxChange(r)">
-        </ion-checkbox>
+        <ion-checkbox slot="end" [(ngModel)]="r.checked" (ionChange)="onCheckboxChange(r)"></ion-checkbox>
       </ion-item>
 
-      <!-- OPCIONES PARA BORRAR Y EDITAR -->
       <ion-item-options>
         <ion-item-option (click)="addUpdateRutinas(r)">
           <ion-icon class="option-btn" name="create-outline"></ion-icon>
         </ion-item-option>
-
         <ion-item-option (click)="deleteRutina(r)" color="danger">
           <ion-icon class="option-btn" name="trash-outline"></ion-icon>
         </ion-item-option>

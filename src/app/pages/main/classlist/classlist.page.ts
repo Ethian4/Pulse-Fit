@@ -4,7 +4,11 @@ import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateRutinasComponent } from 'src/app/shared/components/add-update-rutinas/add-update-rutinas.component';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { addDays, startOfWeek, format } from 'date-fns';
+import { es } from 'date-fns/locale';
+import { formatDate } from '@angular/common'; // Importa el módulo para manejar fechas
 
 @Component({
   selector: 'app-classlist',
@@ -12,34 +16,69 @@ import { AddUpdateRutinasComponent } from 'src/app/shared/components/add-update-
   styleUrls: ['./classlist.page.scss'],
 })
 export class ClasslistPage implements OnInit {
-
+  
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
-
-
   Rutinas: Rutinas[] = [];
-  ngOnInit() {
-  }
+  weekDays: { label: string; date: Date }[] = [];
 
-  user(): User {
-    return this.utilsSvc.getFromLocalStorage('user');
+  ngOnInit() {
+    this.initializeWeekDays();
   }
 
   ionViewWillEnter() {
     this.getRutinas();
   }
 
+  
+
+  initializeWeekDays() {
+    const start = startOfWeek(new Date(), { weekStartsOn: 1 }); // Lunes como inicio de semana
+    this.weekDays = Array.from({ length: 7 }, (_, i) => ({
+      label: format(addDays(start, i), 'EEE', { locale: es }), // Formato de día en 3 letras en español
+      date: addDays(start, i),
+    }));
+  }
+
+
+  getRoutineLetter(dayIndex: number): string {
+    const currentDate = this.weekDays[dayIndex].date;
+
+    const rutina = this.Rutinas.find(r => {
+      const rutinaDate = new Date(r.date); // Asegúrate de que 'date' sea una propiedad válida en Rutinas
+      return rutinaDate.toDateString() === currentDate.toDateString();
+    });
+
+    return rutina ? this.getAlphabetLetter(this.Rutinas.indexOf(rutina)) : '-'; // Devuelve la letra o un guión
+  }
+
+
+  // Devuelve el usuario desde el localStorage
+  user(): User {
+    return this.utilsSvc.getFromLocalStorage('user');
+  }
+
+
+
   //OBTENER LAS RUTINAS 
   getRutinas() {
-    let path = `users/${this.user().uid}/Rutinas`
-
-    let sub = this.firebaseSvc.getCollectionData(path).subscribe({
+    const path = `users/${this.user().uid}/Rutinas`;
+    const sub = this.firebaseSvc.getCollectionData(path).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.Rutinas = res;
-        sub.unsubscribe();
-      } 
-    })
+        sub.unsubscribe(); 
+      },
+    });
+  }
+
+  getAlphabetLetter(index: number): string {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return alphabet[index % alphabet.length];
+  }
+
+
+  hasRoutine(dayIndex: number): boolean {
+    return !!this.getRoutineLetter(dayIndex); // Devuelve true si hay una letra para el día
   }
 
   // ELIMINAR RUTINA
@@ -107,19 +146,14 @@ export class ClasslistPage implements OnInit {
 }
 
 
-  getAlphabetLetter(index: number): string {
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    return alphabet[index % alphabet.length];
-  }
 
   //Agregar Rutina
   async addUpdateRutinas(Rutina?: Rutinas) {
-
-    let success = await this.utilsSvc.presentModal({
+    const success = await this.utilsSvc.presentModal({
       component: AddUpdateRutinasComponent,
       cssClass: 'add-update-modal',
-      componentProps: { Rutina }
-    })
+      componentProps: { Rutina },
+    });
 
     if (success) this.getRutinas();
   }
