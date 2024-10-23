@@ -1,49 +1,41 @@
 <ion-content class="ion-padding-top ion-text-center">
 
-<ion-avatar >
-  <img *ngIf="user()?.image" [src]="user()?.image" />
-
-  <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
-</ion-avatar>
-
-<br>
-<br>
-
-<ion-item button class="photo-btn" (click)="takeImage()" >
-  <ion-icon name="camera-outline"></ion-icon>
-</ion-item>
+  <ion-avatar>
+    <img *ngIf="user()?.image" [src]="user()?.image" />
+    <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
+  </ion-avatar>
 
 
+  <div class="camera-circle" (click)="takeImage()">
+    <ion-icon name="camera-outline"></ion-icon>
+  </div>
 
-<h2>{{user().name}}</h2>
-<div>Gym Bro</div>
+  <h2>{{user().name}}</h2>
+  <div>Gym Bro</div>
 
-<ion-item button detail>
-  <ion-icon color="primary" slot="start" name="person-outline"></ion-icon>
-  <ion-label>Datos Personales</ion-label>
-</ion-item>
+  <ion-item button detail>
+    <ion-icon class="items" color="primary" slot="start" name="person-outline"></ion-icon>
+    <ion-label>Datos Personales</ion-label>
+  </ion-item>
 
-<ion-item button detail>
-  <ion-icon color="primary" slot="start" name="cash-outline"></ion-icon>
-  <ion-label>Metodos de Pago</ion-label>
-</ion-item>
+  <ion-item button detail>
+    <ion-icon class="items" color="primary" slot="start" name="cash-outline"></ion-icon>
+    <ion-label>Metodos de Pago</ion-label>
+  </ion-item>
 
-<ion-item button detail>
-  <ion-icon color="primary" slot="start" name="ticket-outline"></ion-icon>
-  <ion-label>Datos de Facturacion</ion-label>
-</ion-item>
+  <ion-item button detail>
+    <ion-icon class="items" color="primary" slot="start" name="ticket-outline"></ion-icon>
+    <ion-label>Datos de Facturacion</ion-label>
+  </ion-item>
 
-<ion-item button detail>
-  <ion-icon color="primary" slot="start" name="settings-outline"></ion-icon>
-  <ion-label>Configuracion</ion-label>
-</ion-item>
+  <ion-item button detail>
+    <ion-icon class="items" color="primary" slot="start" name="settings-outline"></ion-icon>
+    <ion-label>Configuracion</ion-label>
+  </ion-item>
 
-<ion-item (click)="signOut()">
-  <ion-icon color="primary" slot="start" name="exit-outline"></ion-icon>
-  <ion-label>Cerrra Sesion</ion-label>
-</ion-item>
-
-
-
+  <ion-item (click)="signOut()">
+    <ion-icon class="items" color="primary" slot="start" name="exit-outline"></ion-icon>
+    <ion-label>Cerrar Sesion</ion-label>
+  </ion-item>
 
 </ion-content>

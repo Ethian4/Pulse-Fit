@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logo',
@@ -6,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./logo.component.scss'],
 })
 export class LogoComponent  implements OnInit {
+  welcomeMessage: string;
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.updateWelcomeMessage();
+  }
 
+  updateWelcomeMessage() {
+    const currentRoute = this.router.url;
+
+    if (currentRoute === '/auth/sign-up') {
+      this.welcomeMessage = 'Regístrate';
+    } else if (currentRoute === '/auth') {
+      this.welcomeMessage = 'Bienvenido';
+    } else {
+      this.welcomeMessage = ''; // Mensaje por defecto si no coincide con las rutas
+    }
+  }
 }

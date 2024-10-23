@@ -43,13 +43,14 @@ export class ClasslistPage implements OnInit {
 
   getRoutineLetter(dayIndex: number): string {
     const currentDate = this.weekDays[dayIndex].date;
-
+  
     const rutina = this.Rutinas.find(r => {
       const rutinaDate = new Date(r.date); // Asegúrate de que 'date' sea una propiedad válida en Rutinas
       return rutinaDate.toDateString() === currentDate.toDateString();
     });
-
-    return rutina ? this.getAlphabetLetter(this.Rutinas.indexOf(rutina)) : '-'; // Devuelve la letra o un guión
+  
+    // Si no hay rutina, devolver un guion "-"
+    return rutina ? this.getAlphabetLetter(this.Rutinas.indexOf(rutina)) : '-';
   }
 
 
@@ -78,7 +79,8 @@ export class ClasslistPage implements OnInit {
 
 
   hasRoutine(dayIndex: number): boolean {
-    return !!this.getRoutineLetter(dayIndex); // Devuelve true si hay una letra para el día
+    // Verifica si la letra del día es distinta de "-"
+    return this.getRoutineLetter(dayIndex) !== '-';
   }
 
   // ELIMINAR RUTINA

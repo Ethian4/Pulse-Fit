@@ -29,6 +29,15 @@ ion-button {
     text-transform: none;
 }
 
+ion-app {
+    background-color: #F5ECEC;
+  }
+  
+  ion-content {
+    --background: #F5ECEC;
+  }
+  
+
 // safe padding for ios
 .safe-p-bottom{
     padding-bottom: constant(safe-area-inset-bottom); // for ios 13+
@@ -141,4 +150,32 @@ ion-button {
     --ion-color-primary-tint: #14151A ;
   }
 
+  body {
+    font-family: 'Amiko', sans-serif;
+  }
+  
+
+  :root {
+    --ion-font-family: 'Amiko', sans-serif; 
+  }
+  
+  
+  /* Estilo para los campos de entrada personalizados */
+  .auth-content app-custom-input {
+    --border-color: #e0e0e0;
+    --border-radius: 15px;
+    --border-style: solid;
+    --border-width: 1px;
+    margin: 20px 0;
+
+    ion-label {
+        position: relative;
+        bottom: 2px;
+    }
+
+    .eye-icon {
+        position: relative;
+        top: 13px;
+    }
+  }
   

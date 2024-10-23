@@ -1,0 +1,33 @@
+ion-app {
+    background-color: #F5ECEC;
+  }
+  
+  ion-tab-bar {
+    background-color: white; /* Color del fondo de los tabs */
+    position: relative; /* Necesario para posicionar el pseudo-elemento */
+    border-top-left-radius: 50px; /* Radio superior izquierdo */
+    border-top-right-radius: 50px; /* Radio superior derecho */
+    height: 80px; /* Altura de los tabs, puedes ajustar según necesites */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2); /* Sombra para darle profundidad */
+    overflow: hidden; /* Ocultar parte del pseudo-elemento que sobresale */
+  }
+  
+  ion-tab-button {
+    --background: transparent; /* Fondo transparente para botones */
+    position: relative; /* Necesario para el pseudo-elemento */
+  }
+  
+  ion-tab-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 100%; /* Posicionar justo arriba de los tabs */
+    left: 50%;
+    transform: translateX(-50%); /* Centrar horizontalmente */
+    width: 150%; /* Aumentar el ancho para crear el efecto de media naranja */
+    height: 80px; /* Altura para que cubra los tabs */
+    background: white; /* Color de fondo de la media naranja */
+    border-radius: 50%; /* Hacer que sea un círculo */
+    z-index: -1; /* Enviar el pseudo-elemento detrás de los tabs */
+  }
+  
+  

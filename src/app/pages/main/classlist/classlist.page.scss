@@ -1,85 +1,170 @@
-.white-text {
-    color: #ffffff;
-  }
-  
-  .black-background {
-    --background: #121212;
-  }
+.title-left {
+  text-align: left;
+  margin-left: 16px;
+  font-size: 2em; /* Aumenta el tamaño del título */
+  margin-top: 50px; /* Agrega espacio adicional desde la parte superior */
+  font-weight: bold; /* Asegúrate de que el texto sea negrita */
+}
 
-  .gray-background {
-    --background: #212121;
-  }
+.space-between {
+  margin: 20px 0;
+}
 
-  ion-progress-bar {
-    --background: #121212;
-    --progress-background: #09c567;
-  }
+.custom-fab {
+  transform: translate(-10px, -60px);
+}
 
-  .custom-fab {
-    transform: translate(-10px, -60px); /* X: -10px (izquierda), Y: -60px (arriba) */
-  }
-  
-  .alphabet-label {
-    margin-right: 24px;
-    font-weight: bold;
-    //color: #D5FF5F; /* Verde, puedes cambiarlo por el color que prefieras */
-    font-size: 1.2em; /* Opcional: Ajusta el tamaño */
-  }
+.alphabet-label {
+  margin-right: 24px;
+  font-weight: bold;
+  font-size: 1.5em; /* Aumenta el tamaño de la letra */
+  color: #71A71A;
+}
 
-  ion-checkbox::part(container) {
-    border-radius: 4px;
-    border: 2px solid #000000;
-  }
+ion-checkbox::part(container) {
+  border-radius: 4px;
+  border: 2px solid #000000;
+}
+
+ion-checkbox {
+  margin-left: 8px;
+  --size: 20px;
+}
+
+.calendar {
+  background-color: white;
+  color: #000000;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Distribución uniforme */
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-bottom: 5px; /* Reduce la separación entre header y cuerpo */
+  line-height: 1; /* Elimina espacio vertical extra entre líneas */
+}
+
+.calendar-body {
   
-  ion-checkbox {
-    margin-left: 8px; /* Ajusta el espacio entre el nombre y el checkbox */
-    --size: 20px; /* Ajusta el tamaño del checkbox */
-  }
-  
-  .calendar {
-    background-color: #5a5a5a; // Establece el color de fondo
-    color: rgb(255, 255, 255); // Cambia el color del texto a blanco para mejorar la visibilidad
-    border-radius: 8px; // Opcional: añade bordes redondeados
-    padding: 15px; // Opcional: añade padding interno
-  
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-    }
-  
-    .calendar-body {
-      display: flex;
-      justify-content: space-between;
-      color: rgb(0, 0, 0); // Cambia el color del texto a blanco
-    }
-  
-    .calendar-day {
-      text-align: center;
-      flex: 1;
-      padding: 10px; // Opcional: añade padding a cada día
-    }
-  
-    .day-number {
-      font-size: 1.2em;
-      margin-bottom: 5px;
-      color: white; // Cambia el color del número del día a blanco
-    }
-  
-    .routine-circle {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: black; // Color de fondo de los círculos
-      &.active {
-        background-color: #71A71A; // Cambia el color si hay rutina
-      }
-    }
-  }
-  
-  
-  
-  
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Asegura la alineación */
+}
+
+.calendar-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px; /* Ajusta la altura si es necesario */
+}
+
+.day-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.day-number {
+  font-size: 1em;
+  color: #000000;
+}
+
+.routine-circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #71A71A;
+}
+
+.routine-circle.active {
+  background-color: #71A71A;
+}
+
+ion-item {
+  margin: 10px 15px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+
+ion-list {
+  background-color: transparent;
+}
+
+//--------------
+.calendar-container {
+  width: 100%;
+  max-width: 400px; /* Reducido el ancho máximo del contenedor */
+  margin: auto;
+  padding: 10px; /* Reducido el padding */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Asegura la alineación del encabezado */
+  margin-bottom: 5px; /* Reducido el margen inferior */
+}
+
+.calendar-day-name {
+  font-size: 1em; /* Reducido el tamaño de fuente */
+  font-weight: bold;
+  text-align: center;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Alineación de las columnas */
+}
+
+.calendar-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px; /* Ajustada la altura */
+}
+
+.day-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px; /* Reducido el espacio entre número y círculo */
+}
+
+.day-number {
+  font-size: 0.9em; /* Reducido el tamaño de fuente */
+  color: #000000;
+}
+
+.routine-circle {
+  width: 20px; /* Reducido el tamaño del círculo */
+  height: 20px; /* Reducido el tamaño del círculo */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: 71A71A;
+  color: white;
+  font-size: 0.8em; /* Tamaño de letra dentro del círculo más pequeño */
+}
+
+.routine-circle.active {
+  background-color: #71A71A; /* Color verde activo */
+}
+
+.dash {
+  font-size: 1em; /* Reducido el tamaño de la letra del guion */
+  color: #71A71A;
+}

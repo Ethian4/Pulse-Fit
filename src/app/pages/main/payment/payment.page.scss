@@ -1,17 +1,45 @@
-.ColorVerde {
-  background-color: #71A71A; /* Color de fondo verde */
-  color: #000000; /* Color del texto negro */
-  --background: #71A71A; /* Asegúrate de que el fondo se aplique correctamente */
-  --color: #000000; /* Color del texto */
-}
 
-/* Para un efecto hover si lo deseas */
-.ColorVerde:hover {
-  background-color: #5b9b5b; /* Color un poco más oscuro al pasar el ratón */
-}
 
 ion-card {
   margin-top: 70px; /* Ajusta el espacio encima del card */
   background-color: #ffffff; /* Fondo blanco para el card */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para un efecto de profundidad */
+}
+
+.title-left {
+  text-align: left;
+  margin-left: 16px; /* Ajusta según necesites */
+}
+
+.Plan {
+  text-align: left;
+}
+
+
+.plan-info {
+  display: flex;
+  justify-content: space-between; /* Alinea a izquierda y derecha */
+  padding: 10px 0; /* Espaciado entre elementos */
+}
+
+.info-value {
+  text-align: right; /* Alinea el valor a la derecha */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Centra el botón */
+  margin-top: 60px; /* Espaciado superior para mover el botón más abajo */
+  margin-bottom: 20px; /* Espaciado inferior para separar el botón del borde */
+}
+
+.custom-button {
+  --background: #71A71A; /* Color de fondo del botón */
+  --border-radius: 20px; /* Bordes redondeados */
+  --padding-start: 32px; /* Espaciado interno a la izquierda */
+  --padding-end: 32px; /* Espaciado interno a la derecha */
+  --padding-top: 12px; /* Espaciado interno en la parte superior */
+  --padding-bottom: 12px; /* Espaciado interno en la parte inferior */
+  --font-size: 18px; /* Tamaño de la fuente */
+  --color: white; /* Color del texto */
 }

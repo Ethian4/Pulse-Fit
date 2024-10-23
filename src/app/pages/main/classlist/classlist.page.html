@@ -1,20 +1,38 @@
 <ion-content class="ion-padding-top ion-text-center">
-  <h1>Rutinas</h1>
+  <h1 class="title-left"><strong>Rutinas</strong></h1>
 
   <!-- CALENDARIO SEMANAL -->
-  <div class="calendar">
+  <div class="calendar-container">
+    <!-- Encabezado con los nombres de los días -->
     <div class="calendar-header">
-      <div class="header-item" *ngFor="let day of weekDays">{{ day.label }}</div>
+      <div class="calendar-day-name" *ngFor="let day of weekDays">
+        {{ day.label.toUpperCase() }}
+      </div>
     </div>
+  
+    <!-- Cuerpo del calendario con los números y rutinas -->
     <div class="calendar-body">
       <div class="calendar-day" *ngFor="let day of weekDays; let i = index">
-        <div class="day-number">{{ day.date | date: 'd' }}</div>
-        <div class="routine-circle" [ngClass]="{'active': hasRoutine(i)}">
-          <strong>{{ getRoutineLetter(i) }} </strong>
+        <div class="day-content">
+          <div class="day-number">{{ day.date | date: 'd' }}</div>
+  
+          <!-- Mostrar el círculo con letra si aplica -->
+          <ng-container *ngIf="getRoutineLetter(i) !== '-'">
+            <div class="routine-circle">
+              <strong>{{ getRoutineLetter(i) }}</strong>
+            </div>
+          </ng-container>
+  
+          <!-- Mostrar solo un guion si no hay rutina -->
+          <ng-container *ngIf="getRoutineLetter(i) === '-'">
+            <span class="dash">-</span>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="space-between"></div>
 
   <!-- LISTA DE RUTINAS -->
   <ion-list>
@@ -22,7 +40,7 @@
       <ion-item>
         <ion-label (click)="addUpdateRutinas(r)" class="ion-text-start">
           <div class="name">
-            <span class="alphabet-label">{{ getAlphabetLetter(i) }}.</span>
+            <span class="alphabet-label">{{ getAlphabetLetter(i) }}</span>
             {{ r.name }}
           </div>
         </ion-label>

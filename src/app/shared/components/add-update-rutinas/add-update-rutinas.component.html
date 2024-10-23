@@ -1,7 +1,6 @@
 <app-header [isModal]="true" [title]="Rutina ? 'Actualizar Rutina' : 'Agregar Rutina'"></app-header>
 <ion-content>
-  <form [formGroup]="form" class="ion-no-padding ion-text-center auth-form" (ngSubmit)="submit()"
-    (keypress.enter)="submit()">
+  <form [formGroup]="form" class="ion-no-padding ion-text-center auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
 
     <!-- NAME -->
     <app-custom-input autocomplete="name" [control]="form.controls.name" type="text" label="Nombre"></app-custom-input>
@@ -14,8 +13,7 @@
       <ion-label>Fecha</ion-label>
       <ion-text>{{ form.value.date || 'Selecciona un Dia' }}</ion-text>
     </ion-item>
-    
-    
+
     <ion-modal #datePicker>
       <ng-template>
         <ion-header>
@@ -26,7 +24,7 @@
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
-    
+
         <ion-content>
           <ion-datetime
             (ionChange)="setDate($event)"
@@ -38,13 +36,6 @@
         </ion-content>
       </ng-template>
     </ion-modal>
-
-    
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
-      <ion-fab-button (click)="agregarEjercicio()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
 
     <!-- EJERCICIO LISTA -->
     <ion-list>
@@ -64,7 +55,15 @@
       </ion-item-sliding>
     </ion-list>
 
-    <!-- BOTON -->
+    <!-- BOTON PARA AGREGAR EJERCICIO -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+      <ion-fab-button (click)="agregarEjercicio()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    
+
+    <!-- BOTON DE ENVÍO -->
     <div class="boton-container">
       <ion-button expand="block" mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
         {{ Rutina ? 'Editar Rutina' : 'Agregar Rutina' }}

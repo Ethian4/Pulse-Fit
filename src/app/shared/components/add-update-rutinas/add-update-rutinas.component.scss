@@ -1,33 +1,41 @@
 .boton-container {
-    position: absolute;
-    bottom: 16px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    
-  }
-  
-  .custom-fab {
-    transform: translate(-10px, -80px); /* X: -10px (izquierda), Y: -60px (arriba) */
-  }
+  /* position: absolute; */ /* Elimina esta línea */
+  margin: 16px 0; /* Ajusta el margen superior e inferior según sea necesario */
+  display: flex;
+  justify-content: center;
+}
 
-  ion-checkbox {
-    --size: 24px;
-    --checkbox-background-checked: #6815ec;
-  }
-  
-  ion-checkbox::part(container) {
-    border-radius: 4px;
-    border: 2px solid #000000;
-  }
+.custom-fab {
+  transform: translate(-10px, -80px); /* Esto puede permanecer igual si necesitas ajustar la posición del FAB */
+}
 
-  .custom-datetime {
-    --padding-top: 0.5rem;  /* Espaciado superior */
-    --padding-bottom: 0.5rem; /* Espaciado inferior */
-    --min-width: 150px;      /* Ancho mínimo */
-    --max-width: 250px;      /* Ancho máximo */
-    --border-radius: 8px;    /* Esquinas redondeadas */
-    font-size: 14px;         /* Tamaño de la fuente */
-  }
-  
+ion-checkbox {
+  --size: 24px;
+  --checkbox-background-checked: #71A71A;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 4px;
+  border: 2px solid #000000;
+}
+
+.custom-datetime {
+  --padding-top: 0.5rem; /* Espaciado superior */
+  --padding-bottom: 0.5rem; /* Espaciado inferior */
+  --min-width: 150px; /* Ancho mínimo */
+  --max-width: 250px; /* Ancho máximo */
+  --border-radius: 8px; /* Esquinas redondeadas */
+  font-size: 14px; /* Tamaño de la fuente */
+}
+
+ion-item {
+  margin: 10px 15px; /* Ajusta el margen superior e inferior y lateral */
+  border-radius: 10px; /* Bordes redondeados */
+  background-color: white; /* Color de fondo opcional */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+  padding: 5px; /* Aumenta el padding para hacer los items más grandes */
+}
+
+ion-list {
+  background-color: transparent; /* Quitar el fondo blanco */
+}

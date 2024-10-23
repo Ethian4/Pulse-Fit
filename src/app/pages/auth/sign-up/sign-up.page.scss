@@ -1,0 +1,14 @@
+ion-content {
+    --padding-top: 100px; /* Ajusta el valor según sea necesario */
+  }
+
+  .sign-up-label {
+    --padding-top: 20px;
+    color: #71A71A; /* Cambia el color del texto a #71A71A */
+}
+
+/* auth.page.scss */
+.sign-up-label, ion-label {
+    display: block; /* Asegura que cada label esté en un renglón separado */
+    margin-top: 10px; /* Ajusta el margen superior como desees */
+  }

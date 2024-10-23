@@ -1,25 +1,36 @@
 <ion-content class="ion-padding-top ion-text-center">
-  <h1>Planes</h1>
+  <h1 class="title-left"><strong>Tu Plan</strong></h1>
   
   <!-- Tarjeta de Plan Básico -->
   <ion-card class="ion-margin-top">
     <ion-card-header>
-      <ion-card-title>Plan Básico</ion-card-title>
+      <ion-card-title class="Plan">Plan Básico</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      Cargo Mensual
+      <div class="plan-info">
+        <span>Cargo Mensual</span>
+        <span class="info-value">$20</span> <!-- Ejemplo de valor -->
+      </div>
+      <div class="plan-info">
+        <span>Tokens Disponibles</span>
+        <span class="info-value">100</span> <!-- Ejemplo de valor -->
+      </div>
+      <div class="plan-info">
+        <span>Siguiente Cobro</span>
+        <span class="info-value">15 de Noviembre</span> <!-- Ejemplo de valor -->
+      </div>
+      <div class="plan-info">
+        <span>Tarjetas de Pago</span>
+        <span class="info-value">2</span> <!-- Ejemplo de valor -->
+      </div>
     </ion-card-content>
-    <ion-card-content>
-      Tokens Disponibles
-    </ion-card-content>
-    <ion-card-content>
-      Siguiente Cobro
-    </ion-card-content>
-    <ion-card-content>
-      Tarjetas de Pago
-    </ion-card-content>
-    <ion-button class="ColorVerde">Mejora tu Plan</ion-button>
+
+    <div class="button-container">
+      <ion-button class="ColorVerde custom-button">
+        <strong>Mejora tu Plan</strong>
+      </ion-button>
+    </div>
+    
   </ion-card>
-  
 </ion-content>

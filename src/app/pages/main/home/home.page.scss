@@ -1,16 +1,13 @@
-.white-text {
-    color: #ffffff;
-  }
-  
-  .black-background {
-    --background: #121212;
-  }
+ion-item {
+  margin: 10px 15px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px; /* Aumenta el padding */
+}
 
-  .gray-background {
-    --background: #212121;
-  }
-
-  ion-progress-bar {
-    --background: #121212;
-    --progress-background: #09c567;
-  }
+ion-label {
+  text-align: left;
+  font-size: 18px; /* Ajusta el tamaño según sea necesario */
+  color: black; /* Asegúrate de que el color sea visible */
+}

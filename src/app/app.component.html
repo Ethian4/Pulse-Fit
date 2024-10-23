@@ -1,28 +1,31 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
-  <ion-tabs> <!-- Ocultar tab bar si showTabs es false -->
+  <ion-tabs>
+    <!-- Ocultar tab bar si showTabs es false -->
     <ion-tab-bar *ngIf="showTabs">
-      <ion-tab-button routerLink="/main/home">
-        <ion-icon name="home"></ion-icon>
+      <ion-tab-button routerLink="/main/home" [ngClass]="{'active-tab': isActive('/main/home')}">
+        <ion-icon name="home" [ngStyle]="{'color': isActive('/main/home') ? '#71A71A' : ''}"></ion-icon>
         <ion-label>Inicio</ion-label>
       </ion-tab-button>
-
-      <ion-tab-button routerLink="/main/classlist">
-        <ion-icon name="barbell"></ion-icon>
+  
+      <ion-tab-button routerLink="/main/classlist" [ngClass]="{'active-tab': isActive('/main/classlist')}">
+        <ion-icon name="barbell" [ngStyle]="{'color': isActive('/main/classlist') ? '#71A71A' : ''}"></ion-icon>
         <ion-label>Rutinas</ion-label>
       </ion-tab-button>
-
-      <ion-tab-button routerLink="/main/payment">
-        <ion-icon name="reader"></ion-icon>
+  
+      <ion-tab-button routerLink="/main/payment" [ngClass]="{'active-tab': isActive('/main/payment')}">
+        <ion-icon name="reader" [ngStyle]="{'color': isActive('/main/payment') ? '#71A71A' : ''}"></ion-icon>
         <ion-label>Plan</ion-label>
       </ion-tab-button>
-
-      <ion-tab-button routerLink="/main/profile">
-        <ion-icon name="person"></ion-icon>
+  
+      <ion-tab-button routerLink="/main/profile" [ngClass]="{'active-tab': isActive('/main/profile')}">
+        <ion-icon name="person" [ngStyle]="{'color': isActive('/main/profile') ? '#71A71A' : ''}"></ion-icon>
         <ion-label>Perfil</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+  
+  
 </ion-app>
 
 
