@@ -1,15 +1,22 @@
 <ion-content class="ion-padding-top ion-text-center">
-
-  <h1>Hola {{user().name}}</h1>
-
-  <ion-item>
-    <ion-label></ion-label>
-  </ion-item>
+  <h1>Hola {{ user().name }}</h1>
 
   <ion-item>
-    <div style="display: flex; flex-direction: column; ">
-      <ion-label><strong>Tu código QR</strong></ion-label>
-      <ion-img src="assets/icon/static-qr-code-3a022e13e9f852ab4a167ba98b378cc9.png" ></ion-img>
+    <div class="circle-container">
+      <div class="donut-chart" [ngStyle]="{'--percentage': percentageMes + '%'}"></div>
+      <span class="percentage-text">{{ percentageMes | number: '1.0-0' }}%</span>
+    </div>
+
+    <div class="routine-info">
+      <div class="routine-item">Este mes: Rutinas {{ rutinasCompletadas }} / {{ rutinasMes }}</div>
+      <div class="routine-item">Esta semana: Rutinas {{ rutinasCompletadas }} / {{ rutinasSemana }}</div>
     </div>
   </ion-item>
-  </ion-content>
+
+  <ion-item>
+    <div class="qr-container">
+      <ion-label><strong>Tu código QR</strong></ion-label>
+      <ion-img src="assets/icon/static-qr-code-3a022e13e9f852ab4a167ba98b378cc9.png"></ion-img>
+    </div>
+  </ion-item>
+</ion-content>

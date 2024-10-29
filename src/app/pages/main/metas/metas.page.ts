@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Router } from '@angular/router'; // Importa el Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-metas',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router'; // Importa el Router
 export class MetasPage implements OnInit {
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
-  router = inject(Router); // Inyecta el Router
+  router = inject(Router);
 
   rutinasMes: number | null = null; // Almacena las sesiones al mes
   rutinasSemana: number | null = null; // Almacena las sesiones a la semana
@@ -21,6 +21,11 @@ export class MetasPage implements OnInit {
   ngOnInit() {
     // Obtener los datos del usuario desde el localStorage
     this.userData = this.utilsSvc.getFromLocalStorage('user');
+
+    // Inicializa rutinasCompletadas en 0 si no está definida
+    if (this.userData.rutinasCompletadas === undefined || this.userData.rutinasCompletadas === null) {
+      this.userData.rutinasCompletadas = 0; // Inicializa a 0
+    }
   }
 
   // Método para guardar las metas
@@ -39,12 +44,17 @@ export class MetasPage implements OnInit {
     // Actualizamos las rutinas del usuario y guardamos en localStorage
     this.userData.rutinasMes = this.rutinasMes;
     this.userData.rutinasSemana = this.rutinasSemana;
+
+    // Asegúrate de que rutinasCompletadas esté definida antes de guardar
+    this.userData.rutinasCompletadas = this.userData.rutinasCompletadas || 0;
+
     this.utilsSvc.saveInLocalStorage('user', this.userData);
 
     // Actualizar en Firebase (opcional)
     this.firebaseSvc.updateDocument(`users/${this.userData.uid}`, { 
       rutinasMes: this.rutinasMes, 
-      rutinasSemana: this.rutinasSemana 
+      rutinasSemana: this.rutinasSemana,
+      rutinasCompletadas: this.userData.rutinasCompletadas // Incluye rutinasCompletadas
     })
     .then(() => {
       console.log('Metas actualizadas correctamente.');

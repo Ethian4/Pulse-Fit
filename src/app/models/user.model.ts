@@ -16,4 +16,5 @@ export interface User{
     tokens: number,
     sigCobro: Date,
     tarjeta: number,
+    rutinasCompletadas: number,
 }

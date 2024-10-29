@@ -3,11 +3,82 @@ ion-item {
   border-radius: 10px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 10px; /* Aumenta el padding */
-}
+  padding: 10px;
 
-ion-label {
-  text-align: left;
-  font-size: 18px; /* Ajusta el tamaño según sea necesario */
-  color: black; /* Asegúrate de que el color sea visible */
+  display: flex; // Hacer que el ion-item use flexbox
+  align-items: center; // Alinear verticalmente
+
+  .circle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    .donut-chart {
+      width: 100px; // Cambia según necesites
+      height: 100px; // Cambia según necesites
+      border-radius: 50%;
+      position: relative;
+      background: conic-gradient(
+        #4caf50 var(--percentage, 0%),
+        #e0e0e0 var(--percentage, 0%) 0%,
+        #e0e0e0 0%
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      // Crea el círculo interior vacío
+      &::before {
+        content: '';
+        position: absolute;
+        top: 15%; // Ajusta según sea necesario para el tamaño del agujero
+        left: 15%; // Ajusta según sea necesario para el tamaño del agujero
+        width: 70%; // Tamaño del agujero
+        height: 70%; // Tamaño del agujero
+        border-radius: 50%;
+        background: white; // Color del centro
+        z-index: 1; // Asegúrate de que esté por encima del gráfico
+      }
+    }
+
+    .percentage-text {
+      position: absolute;
+      top: 50%; // Centrar verticalmente
+      left: 50%; // Centrar horizontalmente
+      transform: translate(-50%, -50%); // Ajuste para centrar el texto
+      font-size: 20px; // Aumenta el tamaño de la fuente
+      color: #71A71A; // Cambiar el color del texto
+      font-weight: bold; // Añade negrita para destacar
+      z-index: 2; // Asegúrate de que esté por encima del agujero
+    }
+  }
+
+  .routine-info {
+    margin-left: 20px; // Espacio entre el círculo y la información
+    color: #71A71A; // Cambiar el color del texto
+    text-align: left; // Alinear el texto a la izquierda
+
+    .routine-item {
+      font-size: 14px; // Ajusta el tamaño según sea necesario
+      color: #000000; // Asegurarse de que el color sea el mismo
+    }
+  }
+
+  .qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    ion-label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    ion-img {
+      width: 300px; // Ajusta según necesites
+      height: auto;
+    }
+  }
 }
