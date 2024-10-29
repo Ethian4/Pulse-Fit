@@ -1,0 +1,33 @@
+<ion-content class="container">
+  <div class="header">
+    <h1 class="title-left"><strong>¿Cuántos años tienes?</strong></h1>
+    <h4>Selecciona tu edad</h4>
+  </div>
+
+  <div class="roulette-container">
+    <div class="roulette-display">
+      <div class="age-numbers" [ngClass]="transitionClass">
+        <div class="age-item">{{ ages[ages.indexOf(selectedAge) - 2] }}</div>
+        <div class="age-item">{{ ages[ages.indexOf(selectedAge) - 1] }}</div>
+        <div class="age-number">{{ selectedAge }}</div>
+        <div class="age-item">{{ ages[ages.indexOf(selectedAge) + 1] }}</div>
+        <div class="age-item">{{ ages[ages.indexOf(selectedAge) + 2] }}</div>
+      </div>
+    </div>
+    <div class="roulette-controls">
+      <ion-button (click)="prevAge()" fill="clear">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-button (click)="nextAge()" fill="clear">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <ion-button class="ColorVerde custom-button">
+      <strong routerLink="/main/peso">Siguiente</strong>
+    </ion-button>
+  </div>
+</ion-content>
+

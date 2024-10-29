@@ -1,0 +1,18 @@
+.loading-container {
+    display: flex; /* Utiliza flexbox para centrar */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    background-color: #71A71A; /* Fondo verde */
+    color: white; /* Color del texto */
+    text-align: center; /* Asegura que el texto esté centrado */
+  }
+  
+  .loading-message {
+    font-size: 24px; /* Tamaño del texto */
+  }
+  
+  ion-spinner {
+    margin-top: 10px; /* Espacio entre el texto y el spinner, si decides usar uno */
+  }
+  

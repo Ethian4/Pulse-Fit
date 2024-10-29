@@ -24,6 +24,30 @@ const routes: Routes = [
   {
     path: 'classlist',
     loadChildren: () => import('./classlist/classlist.module').then(m => m.ClasslistPageModule)
+  },
+  {
+    path: 'genero',
+    loadChildren: () => import('./genero/genero.module').then( m => m.GeneroPageModule)
+  },
+  {
+    path: 'edad',
+    loadChildren: () => import('./edad/edad.module').then( m => m.EdadPageModule)
+  },
+  {
+    path: 'peso',
+    loadChildren: () => import('./peso/peso.module').then( m => m.PesoPageModule)
+  },
+  {
+    path: 'altura',
+    loadChildren: () => import('./altura/altura.module').then( m => m.AlturaPageModule)
+  },
+  {
+    path: 'metas',
+    loadChildren: () => import('./metas/metas.module').then( m => m.MetasPageModule)
+  },
+  {
+    path: 'ready',
+    loadChildren: () => import('./ready/ready.module').then( m => m.ReadyPageModule)
   }
 ];
 

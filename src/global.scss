@@ -179,3 +179,17 @@ ion-app {
     }
   }
   
+  @font-face {
+    font-family: 'Dyson Sans Modern'; /* Nombre que le das a la fuente */
+    src: url('assets/fonts/dyson-sans-modern.ttf') format('truetype'); /* Ruta a la fuente */
+    font-weight: normal; /* Puedes ajustar el peso según la fuente */
+    font-style: normal; /* Puedes ajustar el estilo si es necesario */
+  }
+
+  body {
+    font-family: 'Dyson Sans Modern', sans-serif; /* Usa Dyson como fuente principal */
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Dyson Sans Modern', sans-serif; /* Usa Dyson para títulos */
+  }

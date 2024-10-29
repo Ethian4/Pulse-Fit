@@ -1,0 +1,90 @@
+.container {
+    background-color: #1a1a1a;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .title-left {
+    text-align: center;
+    margin-top: 80px; /* Aumenta el espacio entre el título y el techo */
+    font-size: 2.5em; /* Tamaño del título */
+    font-weight: bold;
+    color: #71A71A;
+  }
+  
+  
+  /* Ajusta el botón "Siguiente" */
+  .custom-button {
+    --background: #71A71A;
+    --border-radius: 30px;
+    --padding-start: 86px;
+    --padding-end: 86px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    font-size: 18px !important; /* Forzamos el tamaño del texto */
+    color: white;
+    text-transform: none; /* Evita que el texto se transforme (por ejemplo, a mayúsculas) */
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 220px; /* Ajuste del espacio superior */
+    margin-bottom: 20px;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  .roulette-container {
+    margin-top: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .roulette-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden; /* Ocultar el contenido que se sale del área */
+  }
+  
+  .age-numbers {
+    display: flex;
+    justify-content: center; /* Centra el contenedor de números */
+    align-items: center; /* Centra verticalmente los números */
+    transition: transform 0.5s ease; /* Animación suave al cambiar */
+  }
+  
+  .age-number {
+    font-size: 4em; /* Tamaño del número central */
+    color: #71A71A; /* Color del número central */
+    margin: 0 20px; /* Espacio a los lados del número central */
+  }
+  
+  .age-item {
+    font-size: 1.5em; /* Tamaño de los números laterales (más pequeño) */
+    color: rgb(0, 0, 0); /* Color de los números laterales */
+    margin: 0 5px; /* Espacio entre los números laterales */
+    width: 40px; /* Ancho fijo para los números laterales */
+    text-align: center; /* Centrar texto en cada número lateral */
+  }
+  
+  .slide-left {
+    transform: translateX(-5%);
+  }
+  
+  .slide-right {
+    transform: translateX(5%);
+  }
+
+    

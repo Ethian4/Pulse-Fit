@@ -1,0 +1,86 @@
+.container {
+    background-color: #1a1a1a;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .title-left {
+    text-align: center;
+    margin-top: 80px; /* Aumenta el espacio entre el título y el techo */
+    font-size: 2.5em; /* Tamaño del título */
+    font-weight: bold;
+    color: #71A71A;
+  }
+  
+  /* Ajusta el espacio entre el título y "Empecemos a conocerte" */
+  .subtitle {
+    margin-top: 10px; /* Reduce el espacio aquí */
+    font-size: 1.5em; /* Tamaño de la fuente del subtítulo */
+    color: white;
+  }
+  
+  /* Mayor espacio entre el subtítulo y el primer círculo */
+  .gender-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Incrementa el espacio entre círculos y subtítulo */
+    align-items: center;
+    margin-top: 40px; /* Aumenta el espacio superior de los círculos */
+  }
+  
+  .gender-button {
+    width: 180px;  /* Tamaño del botón */
+    height: 180px; 
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    font-size: 24px; /* Tamaño del texto */
+    background-color: #FFFFFF;
+    color: #71A71A;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+    border: 2px solid black;
+  
+  }
+  
+  .gender-button ion-icon {
+    font-size: 80px; /* Tamaño del icono */
+    margin-bottom: 15px; 
+  }
+  
+  .gender-button.selected {
+    background-color: #71A71A;
+    color: white; /* Cambia el color del texto a blanco */
+  }
+  
+  .gender-button.selected ion-icon {
+    color: black; /* Cambia el color del ícono a negro */
+  }
+  
+  /* Ajusta el botón "Siguiente" */
+  .custom-button {
+    --background: #71A71A;
+    --border-radius: 30px;
+    --padding-start: 86px;
+    --padding-end: 86px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    font-size: 18px !important; /* Forzamos el tamaño del texto */
+    color: white;
+    text-transform: none; /* Evita que el texto se transforme (por ejemplo, a mayúsculas) */
+  }
+  
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px; /* Ajuste del espacio superior */
+    margin-bottom: 30px;
+  }
+  
