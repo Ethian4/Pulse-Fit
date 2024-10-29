@@ -5,13 +5,22 @@
   </div>
 
   <div class="input-container">
-    <ion-input class="weight-input" type="number" placeholder="Altura" required></ion-input>
+    <ion-input 
+      class="weight-input" 
+      type="number" 
+      placeholder="Altura" 
+      [(ngModel)]="altura" 
+      required>
+    </ion-input>
     <span class="kg-label">Cm</span>
   </div>
 
   <div class="button-container">
-    <ion-button class="ColorVerde custom-button">
-      <strong routerLink="/main/metas">Siguiente</strong>
+    <ion-button 
+      class="ColorVerde custom-button" 
+      [disabled]="!altura" 
+      (click)="saveHeight()">
+      <strong>Siguiente</strong>
     </ion-button>
   </div>
 </ion-content>

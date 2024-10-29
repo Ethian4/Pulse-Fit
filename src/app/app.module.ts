@@ -6,7 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 // FIREBASE 
 
@@ -21,6 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     IonicModule.forRoot({ mode: 'md' }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

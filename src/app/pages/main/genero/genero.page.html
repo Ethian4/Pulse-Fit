@@ -1,25 +1,31 @@
 <ion-content class="container">
   <div class="header">
-    <h1 class="title-left"><strong>Hablanos de ti</strong></h1>
+    <h1 class="title-left"><strong>Háblanos de ti</strong></h1>
     <h4>Empecemos a conocerte</h4>
   </div>
 
   <div class="gender-selection">
-    <button ion-button class="gender-button selected" (click)="selectGender('masculino')">
+    <button ion-button class="gender-button" 
+            [ngClass]="{'selected': genderSelected === 'masculino'}"
+            (click)="selectGender('masculino')">
       <ion-icon name="male-outline"></ion-icon>
       <span>Masculino</span>
     </button>
-  
-    <button ion-button class="gender-button" (click)="selectGender('femenino')">
+
+    <button ion-button class="gender-button" 
+            [ngClass]="{'selected': genderSelected === 'femenino'}"
+            (click)="selectGender('femenino')">
       <ion-icon name="female-outline"></ion-icon>
       <span>Femenino</span>
     </button>
   </div>
-  
 
   <div class="button-container">
-    <ion-button class="ColorVerde custom-button">
-      <strong routerLink="/main/edad">Siguiente</strong>
+    <ion-button class="ColorVerde custom-button"
+                routerLink="/main/edad"
+                [disabled]="!genderSelected"
+                (click)="saveGender()">
+      <strong>Siguiente</strong>
     </ion-button>
   </div>
 </ion-content>

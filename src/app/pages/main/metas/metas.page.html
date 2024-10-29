@@ -6,18 +6,30 @@
 
   <h3><strong>¿Cuántas sesiones al mes?</strong></h3>
   <div class="input-container">
-    <ion-input class="weight-input" type="number" required></ion-input>
+    <ion-input 
+      class="weight-input" 
+      type="number" 
+      [(ngModel)]="rutinasMes" 
+      required>
+    </ion-input>
   </div>
-
 
   <h3><strong>¿Cuántas sesiones a la semana?</strong></h3>
   <div class="input-container">
-    <ion-input class="weight-input" type="number"  required></ion-input>
+    <ion-input 
+      class="weight-input" 
+      type="number" 
+      [(ngModel)]="rutinasSemana" 
+      required>
+    </ion-input>
   </div>
 
   <div class="button-container">
-    <ion-button class="ColorVerde custom-button">
-      <strong routerLink="/main/ready">Siguiente</strong>
+    <ion-button 
+      class="ColorVerde custom-button" 
+      [disabled]="!rutinasMes || !rutinasSemana" 
+      (click)="saveGoals()">
+      <strong>Siguiente</strong>
     </ion-button>
   </div>
 </ion-content>
