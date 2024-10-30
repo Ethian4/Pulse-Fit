@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edad',
@@ -16,8 +17,12 @@ export class EdadPage implements OnInit {
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
 
-  constructor() {
+  constructor(private location: Location) {
     this.initAges();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   ngOnInit() {}

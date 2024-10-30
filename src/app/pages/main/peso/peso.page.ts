@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/services/utils.service';
 import { User } from 'src/app/models/user.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-peso',
@@ -12,11 +13,15 @@ export class PesoPage implements OnInit {
   form: FormGroup;
   utilsSvc = inject(UtilsService);
 
-  constructor() {
+  constructor(private location: Location) {
     // Inicializa el formulario
     this.form = new FormGroup({
       peso: new FormControl('', [Validators.required, Validators.min(1)]),
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   ngOnInit() {}

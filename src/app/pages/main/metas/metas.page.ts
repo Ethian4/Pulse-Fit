@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-metas',
@@ -18,6 +19,14 @@ export class MetasPage implements OnInit {
   rutinasSemana: number | null = null; // Almacena las sesiones a la semana
   userData: User;
 
+  constructor(private location: Location) {}
+
+
+  goBack() {
+    this.location.back();
+  }
+
+  
   ngOnInit() {
     // Obtener los datos del usuario desde el localStorage
     this.userData = this.utilsSvc.getFromLocalStorage('user');

@@ -1,0 +1,97 @@
+
+
+ion-avatar{
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
+
+  .photo-btn{
+    position: relative;
+    bottom: 25px;
+  }
+
+  h2{
+    margin-bottom: 0;
+  }
+
+  
+  .empty-icon{
+    font-size: 140px;
+    opacity: 30%;
+  }
+
+  ion-item {
+    margin: 10px 15px; /* Ajusta el margen superior e inferior y lateral */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: white; /* Color de fondo opcional */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    padding: 5px; /* Aumenta el padding para hacer los items más grandes */
+  }
+  
+  .photo-btn {
+    --background: transparent; /* Sin fondo */
+    border: none; /* Sin borde */
+    margin: 0; /* Sin margen adicional */
+    padding: 0; /* Sin padding */
+    display: flex; /* Para alinear el icono */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    position: relative; /* Necesario para posicionar el icono */
+    bottom: -10px; /* Ajusta la posición vertical del icono */
+  }
+  
+  .photo-btn ion-icon {
+    font-size: 30px; /* Ajusta el tamaño del icono según necesites */
+    color: #000; /* Cambia el color del icono si lo deseas */
+  }
+  
+  .camera-circle {
+    width: 60px; /* Ancho del círculo */
+    height: 60px; /* Alto del círculo */
+    border-radius: 50%; /* Hace que el círculo sea redondo */
+    background-color: #71A71A; /* Color de fondo del círculo */
+    display: flex; /* Para centrar el ícono */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    margin: 10px auto; /* Margen superior/inferior y centrado horizontal */
+    cursor: pointer; /* Cambia el cursor a mano para indicar que es clickeable */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra sutil para dar profundidad */
+    transition: background-color 0.3s, transform 0.3s; /* Transición suave para efectos de hover */
+  
+    ion-icon {
+      font-size: 30px; /* Tamaño del ícono */
+      color: white; /* Color del ícono */
+    }
+  
+    &:hover {
+      background-color: #5a5; /* Cambia el color de fondo al pasar el mouse */
+      transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+    }
+  }
+
+  .back-button {
+    background: transparent; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    padding: 10px; /* Espaciado alrededor del ícono */
+    font-size: 24px; /* Tamaño del ícono */
+    color: #71A71A; /* Color del ícono (puedes cambiarlo según tu diseño) */
+    transition: color 0.3s; /* Suaviza el cambio de color */
+    position: absolute; /* Posicionamiento absoluto */
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    left: 10px; /* Ajusta la distancia desde la izquierda */
+  }
+  
+  .back-button:hover {
+    color: #71A71A; /* Color del ícono al pasar el mouse */
+  }
+  
+  .back-button:focus {
+    outline: none; /* Elimina el contorno de enfoque */
+  }
+  
+  h2{
+    margin-bottom: 40px;
+  }
+  

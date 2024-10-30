@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router'; // Importa el Router
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-altura',
@@ -14,8 +15,17 @@ export class AlturaPage implements OnInit {
   utilsSvc = inject(UtilsService);
   router = inject(Router); // Inyecta el Router
 
+
+
   altura: number | null = null; // Almacena la altura ingresada
   userData: User;
+
+  constructor(private location: Location) {}
+
+
+  goBack() {
+    this.location.back();
+  }
 
   ngOnInit() {
     // Obtener los datos del usuario desde el localStorage

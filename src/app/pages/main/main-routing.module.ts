@@ -48,6 +48,14 @@ const routes: Routes = [
   {
     path: 'ready',
     loadChildren: () => import('./ready/ready.module').then( m => m.ReadyPageModule)
+  },
+  {
+    path: 'datos',
+    loadChildren: () => import('./datos/datos.module').then( m => m.DatosPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   }
 ];
 

@@ -1,0 +1,42 @@
+<ion-content class="ion-padding-top ion-text-center">
+  <button (click)="goBack()" class="back-button">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </button>
+  
+
+  <ion-avatar>
+    <img *ngIf="user()?.image" [src]="user()?.image" />
+    <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
+  </ion-avatar>
+
+
+  <h2>{{user().name}}</h2>
+
+
+  <ion-item>
+    <ion-icon class="items" color="primary" slot="start" name="mail-outline"></ion-icon>
+    <ion-label><strong>Email:</strong> {{user().email}}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon class="items" color="primary" slot="start" name="barbell-outline"></ion-icon>
+    <ion-label><strong>Peso:</strong> {{user().peso}}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon class="items" color="primary" slot="start" name="body-outline"></ion-icon>
+    <ion-label><strong>Altura:</strong> {{user().altura}}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon class="items" color="primary" slot="start" name="transgender-outline"></ion-icon>
+    <ion-label><strong>Genero:</strong> {{user().genero}}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon class="items" color="primary" slot="start" name="calendar-number-outline"></ion-icon>
+    <ion-label><strong>Edad:</strong> {{user().edad}}</ion-label>
+  </ion-item>
+
+
+</ion-content>

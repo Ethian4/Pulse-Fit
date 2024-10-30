@@ -60,3 +60,24 @@
     text-transform: none; /* Evita que el texto se transforme (por ejemplo, a mayúsculas) */
   }
   
+  
+ .back-button {
+  background: transparent; /* Sin fondo */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  padding: 10px; /* Espaciado alrededor del ícono */
+  font-size: 24px; /* Tamaño del ícono */
+  color: #71A71A; /* Color del ícono (puedes cambiarlo según tu diseño) */
+  transition: color 0.3s; /* Suaviza el cambio de color */
+  position: absolute; /* Posicionamiento absoluto */
+  top: 10px; /* Ajusta la distancia desde la parte superior */
+  left: 10px; /* Ajusta la distancia desde la izquierda */
+}
+
+.back-button:hover {
+  color: #71A71A; /* Color del ícono al pasar el mouse */
+}
+
+.back-button:focus {
+  outline: none; /* Elimina el contorno de enfoque */
+}

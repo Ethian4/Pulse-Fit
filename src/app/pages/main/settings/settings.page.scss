@@ -1,0 +1,55 @@
+.terms-container {
+    margin-top: 20px;
+    padding: 16px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  h2 {
+    font-size: 20px;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  
+  p {
+    color: #666;
+    margin-bottom: 12px;
+  }
+  
+  ul {
+    margin-left: 20px; /* Espaciado a la izquierda para la lista */
+    margin-bottom: 12px;
+    color: #666;
+  }
+  
+  ul li {
+    margin-bottom: 6px; /* Espaciado entre elementos de la lista */
+  }
+  
+  .back-button {
+    background: transparent; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    padding: 10px; /* Espaciado alrededor del ícono */
+    font-size: 24px; /* Tamaño del ícono */
+    color: #71A71A; /* Color del ícono (puedes cambiarlo según tu diseño) */
+    transition: color 0.3s; /* Suaviza el cambio de color */
+    position: absolute; /* Posicionamiento absoluto */
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    left: 10px; /* Ajusta la distancia desde la izquierda */
+  }
+  
+  .back-button:hover {
+    color: #71A71A; /* Color del ícono al pasar el mouse */
+  }
+  
+  .back-button:focus {
+    outline: none; /* Elimina el contorno de enfoque */
+  }

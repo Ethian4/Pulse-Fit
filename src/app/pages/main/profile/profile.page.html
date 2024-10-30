@@ -13,14 +13,14 @@
   <h2>{{user().name}}</h2>
   <div>Gym Bro</div>
 
-  <ion-item button detail>
-    <ion-icon class="items" color="primary" slot="start" name="person-outline"></ion-icon>
-    <ion-label>Datos Personales</ion-label>
+  <ion-item button detail routerLink="/main/datos">
+    <ion-icon routerLink="/main/datos" class="items" color="primary" slot="start" name="person-outline"></ion-icon>
+    <ion-label routerLink="/main/datos">Datos Personales</ion-label>
   </ion-item>
 
-  <ion-item button detail>
-    <ion-icon class="items" color="primary" slot="start" name="cash-outline"></ion-icon>
-    <ion-label>Metodos de Pago</ion-label>
+  <ion-item button detail routerLink="/main/payment">
+    <ion-icon routerLink="/main/payment" class="items" color="primary" slot="start" name="cash-outline"></ion-icon>
+    <ion-label routerLink="/main/payment">Metodos de Pago</ion-label>
   </ion-item>
 
   <ion-item button detail>
@@ -28,9 +28,9 @@
     <ion-label>Datos de Facturacion</ion-label>
   </ion-item>
 
-  <ion-item button detail>
-    <ion-icon class="items" color="primary" slot="start" name="settings-outline"></ion-icon>
-    <ion-label>Configuracion</ion-label>
+  <ion-item button detail routerLink="/main/settings" >
+    <ion-icon  routerLink="/main/settings" class="items" color="primary" slot="start" name="book-outline"></ion-icon>
+    <ion-label routerLink="/main/settings" >Terminos y Condiciones</ion-label>
   </ion-item>
 
   <ion-item (click)="signOut()">
