@@ -19,11 +19,9 @@ ion-item {
       height: 100px; // Cambia según necesites
       border-radius: 50%;
       position: relative;
-      background: conic-gradient(
-        #4caf50 var(--percentage, 0%),
-        #e0e0e0 var(--percentage, 0%) 0%,
-        #e0e0e0 0%
-      );
+      background: conic-gradient(#4caf50 var(--percentage, 0%),
+          #e0e0e0 var(--percentage, 0%) 0%,
+          #e0e0e0 0%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -64,21 +62,13 @@ ion-item {
       color: #000000; // Asegurarse de que el color sea el mismo
     }
   }
-
-  .qr-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    ion-label {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    ion-img {
-      width: 300px; // Ajusta según necesites
-      height: auto;
-    }
-  }
 }
+
+ion-label {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px; /* Espacio entre el título y el QR */
+}
+
+
+

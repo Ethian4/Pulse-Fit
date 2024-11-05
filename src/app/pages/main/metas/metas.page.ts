@@ -4,6 +4,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import * as QRCode from 'qrcode';
 
 @Component({
   selector: 'app-metas',
@@ -27,6 +28,7 @@ export class MetasPage implements OnInit {
   }
 
   
+  
   ngOnInit() {
     // Obtener los datos del usuario desde el localStorage
     this.userData = this.utilsSvc.getFromLocalStorage('user');
@@ -45,41 +47,67 @@ export class MetasPage implements OnInit {
     }
   }
 
-  // Método para guardar las metas
-  saveGoals() {
-    if (this.rutinasMes === null || this.rutinasSemana === null) {
-      this.utilsSvc.presentToast({
-        message: 'Por favor ingresa ambas metas.',
-        duration: 2000,
-        color: 'warning',
-        position: 'middle',
-        icon: 'alert-circle-outline',
-      });
-      return;
-    }
+  
 
-    // Actualizamos las rutinas del usuario y guardamos en localStorage
+
+ // Método para guardar las metas y generar el código QR
+ async saveGoals() {
+  if (this.rutinasMes === null || this.rutinasSemana === null) {
+    this.utilsSvc.presentToast({
+      message: 'Por favor ingresa ambas metas.',
+      duration: 2000,
+      color: 'warning',
+      position: 'middle',
+      icon: 'alert-circle-outline',
+    });
+    return;
+  }
+
+  // Generar el código QR con la información del usuario
+  const qrData = {
+    uid: this.userData.uid,
+    name: this.userData.name,
+    email: this.userData.email,
+    rutinasMes: this.rutinasMes,
+    rutinasSemana: this.rutinasSemana
+  };
+
+  try {
+    // Generar el código QR como una URL de imagen (base64)
+    const qrUrl = await QRCode.toDataURL(JSON.stringify(qrData));
+    this.userData.qr = qrUrl; // Guardar el QR en el campo del usuario
+
+    // Actualizamos las metas del usuario
     this.userData.rutinasMes = this.rutinasMes;
     this.userData.rutinasSemana = this.rutinasSemana;
 
     // Asegúrate de que rutinasCompletadas esté definida antes de guardar
     this.userData.rutinasCompletadas = this.userData.rutinasCompletadas || 0;
 
+    // Guardar en localStorage
     this.utilsSvc.saveInLocalStorage('user', this.userData);
 
-    // Actualizar en Firebase (opcional)
-    this.firebaseSvc.updateDocument(`users/${this.userData.uid}`, { 
+    // Actualizar en Firebase
+    await this.firebaseSvc.updateDocument(`users/${this.userData.uid}`, { 
       rutinasMes: this.rutinasMes, 
       rutinasSemana: this.rutinasSemana,
-      rutinasCompletadas: this.userData.rutinasCompletadas // Incluye rutinasCompletadas
-    })
-    .then(() => {
-      console.log('Metas actualizadas correctamente.');
-      // Redirigir a la página de "ready"
-      this.router.navigate(['/main/ready']);
-    })
-    .catch((error) => {
-      console.error('Error al actualizar las metas:', error);
+      rutinasCompletadas: this.userData.rutinasCompletadas, 
+      qr: this.userData.qr // Guardar el QR en Firebase
+    });
+
+    console.log('Metas y QR actualizados correctamente.');
+
+    // Redirigir a la página de "ready"
+    this.router.navigate(['/main/ready']);
+  } catch (error) {
+    console.error('Error al generar el QR o guardar las metas:', error);
+    this.utilsSvc.presentToast({
+      message: 'Hubo un error al generar el QR o guardar las metas.',
+      duration: 2000,
+      color: 'danger',
+      position: 'middle',
+      icon: 'alert-circle-outline',
     });
   }
+}
 }

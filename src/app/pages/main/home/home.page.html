@@ -16,7 +16,8 @@
   <ion-item>
     <div class="qr-container">
       <ion-label><strong>Tu código QR</strong></ion-label>
-      <ion-img src="assets/icon/static-qr-code-3a022e13e9f852ab4a167ba98b378cc9.png"></ion-img>
+      <!-- Usar ion-img en lugar de img para manejar mejor las imágenes en Ionic -->
+      <ion-img *ngIf="user().qr" [src]="user().qr" alt="Código QR"></ion-img>
     </div>
   </ion-item>
 </ion-content>

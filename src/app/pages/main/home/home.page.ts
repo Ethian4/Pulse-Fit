@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
-
+import * as QRCode from 'qrcode';  // Importa el paquete QRCode
 
 @Component({
   selector: 'app-home',
@@ -18,8 +18,10 @@ export class HomePage implements OnInit {
   rutinasCompletadas: number = 0;
   percentageMes: number = 0;
 
+
   ngOnInit() {
     const user: User = this.utilsSvc.getFromLocalStorage('user');
+
 
     if (user) {
       this.rutinasMes = user.rutinasMes || 0;
