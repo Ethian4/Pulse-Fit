@@ -14,7 +14,9 @@ export interface User{
     edad: number,
     cargoMensual: number,
     tokens: number,
-    sigCobro: Date,
+    sigCobro: string,
     tarjeta: number,
     rutinasCompletadas: number,
+    qr: string,
+    planNombre: string
 }

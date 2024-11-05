@@ -10,25 +10,25 @@
     <ion-card-content>
       <div class="plan-info">
         <span>Cargo Mensual</span>
-        <span class="info-value">$20</span> <!-- Ejemplo de valor -->
+        <span class="info-value">{{user().cargoMensual}}</span> 
       </div>
       <div class="plan-info">
         <span>Tokens Disponibles</span>
-        <span class="info-value">100</span> <!-- Ejemplo de valor -->
+        <span class="info-value">{{user().tokens}}</span> 
       </div>
       <div class="plan-info">
         <span>Siguiente Cobro</span>
-        <span class="info-value">15 de Noviembre</span> <!-- Ejemplo de valor -->
+        <span class="info-value">{{user().sigCobro}}</span> 
       </div>
       <div class="plan-info">
         <span>Tarjetas de Pago</span>
-        <span class="info-value">2</span> <!-- Ejemplo de valor -->
+        <span class="info-value">{{user().tarjeta}}</span> 
       </div>
     </ion-card-content>
 
     <div class="button-container">
-      <ion-button class="ColorVerde custom-button">
-        <strong>Mejora tu Plan</strong>
+      <ion-button routerLink="/main/planes" class="ColorVerde custom-button">
+        <strong routerLink="/main/planes" >Mejora tu Plan</strong>
       </ion-button>
     </div>
     

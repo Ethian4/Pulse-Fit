@@ -6,5 +6,5 @@ export interface Rutinas{
     nota: string,
     Ejercicio: Ejercicios,
     checked: boolean
-    date: string; // Nueva propiedad para almacenar la fecha
+    date: string; 
 }

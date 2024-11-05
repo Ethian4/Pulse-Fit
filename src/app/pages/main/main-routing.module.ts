@@ -56,6 +56,10 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'planes',
+    loadChildren: () => import('./planes/planes.module').then( m => m.PlanesPageModule)
   }
 ];
 

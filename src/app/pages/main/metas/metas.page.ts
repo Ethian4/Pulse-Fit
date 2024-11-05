@@ -34,6 +34,12 @@ export class MetasPage implements OnInit {
     // Inicializa rutinasCompletadas en 0 si no está definida
     if (this.userData.rutinasCompletadas === undefined || this.userData.rutinasCompletadas === null) {
       this.userData.rutinasCompletadas = 0; // Inicializa a 0
+
+      this.userData.tokens = 0;
+      this.userData.cargoMensual = 0;
+      this.userData.sigCobro = "";
+      this.userData.tarjeta = null;
+      this.userData.planNombre = "Sin Plan";
     }
   }
 
