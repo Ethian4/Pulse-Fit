@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Location } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-planes',
@@ -23,9 +24,11 @@ export class PlanesPage implements OnInit {
   ngOnInit() {
   }
 
+
   goBack() {
     this.location.back();
   }
+
 
 }
 

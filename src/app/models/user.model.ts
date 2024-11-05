@@ -18,5 +18,7 @@ export interface User{
     tarjeta: number,
     rutinasCompletadas: number,
     qr: string,
-    planNombre: string
+    planNombre: string,
+    ga: number,
+    gp: number,
 }

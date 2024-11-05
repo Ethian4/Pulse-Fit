@@ -1,6 +1,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -22,6 +23,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    IonicModule,  // Agrega esta línea
     IonicModule.forRoot({ mode: 'md' }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -31,7 +33,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     })],
+    
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({"projectId":"gym-app-43543","appId":"1:1070802927753:web:bfd492b0c94ab36314c658","storageBucket":"gym-app-43543.appspot.com","apiKey":"AIzaSyB5NLNGEkv-SUxNcGQZWFyLVq-zoth_vbM","authDomain":"gym-app-43543.firebaseapp.com","messagingSenderId":"1070802927753","measurementId":"G-8G8PXWNB7Q"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideFirebaseApp(() => initializeApp({"projectId":"gym-app-43543","appId":"1:1070802927753:web:bfd492b0c94ab36314c658","storageBucket":"gym-app-43543.appspot.com","apiKey":"AIzaSyB5NLNGEkv-SUxNcGQZWFyLVq-zoth_vbM","authDomain":"gym-app-43543.firebaseapp.com","messagingSenderId":"1070802927753","measurementId":"G-8G8PXWNB7Q"}))],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],  
 })
 export class AppModule { }

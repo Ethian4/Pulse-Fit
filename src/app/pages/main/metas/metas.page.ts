@@ -40,6 +40,8 @@ export class MetasPage implements OnInit {
       this.userData.sigCobro = "";
       this.userData.tarjeta = null;
       this.userData.planNombre = "Sin Plan";
+      this.userData.gp = 0;
+      this.userData.ga = 0;
     }
   }
 

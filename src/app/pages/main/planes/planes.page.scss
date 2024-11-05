@@ -1,20 +1,142 @@
 .back-button {
-    background: transparent; /* Sin fondo */
-    border: none; /* Sin borde */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
-    padding: 10px; /* Espaciado alrededor del ícono */
-    font-size: 24px; /* Tamaño del ícono */
-    color: #71A71A; /* Color del ícono (puedes cambiarlo según tu diseño) */
-    transition: color 0.3s; /* Suaviza el cambio de color */
-    position: absolute; /* Posicionamiento absoluto */
-    top: 10px; /* Ajusta la distancia desde la parte superior */
-    left: 10px; /* Ajusta la distancia desde la izquierda */
+  background: transparent;
+  /* Sin fondo */
+  border: none;
+  /* Sin borde */
+  cursor: pointer;
+  /* Cambia el cursor al pasar por encima */
+  padding: 10px;
+  /* Espaciado alrededor del ícono */
+  font-size: 24px;
+  /* Tamaño del ícono */
+  color: #71A71A;
+  /* Color del ícono (puedes cambiarlo según tu diseño) */
+  transition: color 0.3s;
+  /* Suaviza el cambio de color */
+  position: absolute;
+  /* Posicionamiento absoluto */
+  top: 10px;
+  /* Ajusta la distancia desde la parte superior */
+  left: 10px;
+  /* Ajusta la distancia desde la izquierda */
+}
+
+.back-button:hover {
+  color: #71A71A;
+  /* Color del ícono al pasar el mouse */
+}
+
+.back-button:focus {
+  outline: none;
+  /* Elimina el contorno de enfoque */
+}
+
+
+
+.custom-swiper {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  padding: 0 10px;
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    /* Asegura que cada slide esté centrado */
+    align-items: center;
+    width: 100%;
+    /* Asegura que cada slide ocupe el 100% del contenedor */
+
   }
-  
-  .back-button:hover {
-    color: #71A71A; /* Color del ícono al pasar el mouse */
+
+  .slide-content {
+    position: relative;
+    max-width: 600px;
+    /* Limita el tamaño máximo de cada slide */
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    /* Agrega margen a los lados (izquierda y derecha) */
   }
-  
-  .back-button:focus {
-    outline: none; /* Elimina el contorno de enfoque */
+
+
+  .background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(4px);
+    /* Efecto de difuminado */
   }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Establece el overlay para llenar todo el slide */
+    display: flex;
+    flex-direction: column;
+    /* Mantiene el título, texto y botón en columnas */
+    justify-content: center;
+    /* Centra el contenido verticalmente */
+    align-items: center;
+    /* Centra el contenido horizontalmente */
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    /* Fondo oscuro para mejorar la visibilidad del texto */
+    padding: 20px;
+    text-align: center;
+  }
+
+
+  .slide-text {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .contract-button {
+    width: 100%;
+    /* El botón ocupará el 100% del ancho del slide */
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    margin-top: 200px;
+    --background: #71A71A;
+    /* Color de fondo del botón */
+    margin-top: auto;
+  }
+}
+
+
+
+.slide-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  /* Se agrega margen inferior para separar del listado */
+}
+
+.slide-list {
+  list-style-type: disc;
+  /* Muestra viñetas como lista */
+  padding-left: 20px;
+  /* Agrega espacio a la izquierda para las viñetas */
+  margin: 0;
+}
+
+.slide-item {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  /* Espaciado entre los elementos de la lista */
+  text-align: left;
+  /* Alinea el texto a la izquierda */
+  line-height: 1.5;
+}

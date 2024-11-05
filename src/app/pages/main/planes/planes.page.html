@@ -2,8 +2,61 @@
   <button (click)="goBack()" class="back-button">
     <ion-icon name="arrow-back-outline"></ion-icon>
   </button>
-  <h1 class="title-left"><strong>Tu Plan</strong></h1>
-  
+  <h1 class="title-left">Membresía</h1>
+  <p>Selecciona tu plan</p>
 
+  <swiper-container class="custom-swiper">
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/icon/Imagen1.png" alt="Imagen 1" class="background-image">
+        <div class="overlay">
+          <h2><strong>Nuevos Usuarios</strong></h2>
+          <h2 class="slide-title" >(3 Meses)</h2>
+          <ul class="slide-list">
+            <li class="slide-item">$1500 MXN un solo pago</li>
+            <li class="slide-item">1 Gimnasio Principal</li>
+            <li class="slide-item">2 Gimnasios Adicionales</li>
+            <li class="slide-item">8 tokens de acceso a los gyms adicionales</li>
+          </ul>
+          <ion-button class="contract-button">Contratar</ion-button>
+        </div>
+      </div>
+    </swiper-slide>
+    
+    
+
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/icon/Imagen2.png" alt="Imagen 2" class="background-image">
+        <div class="overlay">
+          <h2 class="slide-title">Pulse Basico</h2>
+          <ul class="slide-list">
+            <li class="slide-item">$800 MXN un solo pago</li>
+            <li class="slide-item">Suscripción mensual</li>
+            <li class="slide-item">1 Gimnasio Principal</li>
+            <li class="slide-item">3 Gimnasios Adicionales</li>
+            <li class="slide-item">12 tokens de acceso a los gyms adicionales</li>
+          </ul>
+          <ion-button class="contract-button">Contratar</ion-button>
+        </div>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="slide-content">
+        <img src="assets/icon/Imagen3.png" alt="Imagen 3" class="background-image">
+        <div class="overlay">
+          <h2 class="slide-title">Pulse Premium</h2>
+          <ul class="slide-list">
+            <li class="slide-item">$1200 MXN un solo pago</li>
+            <li class="slide-item">Suscripción mensual</li>
+            <li class="slide-item">1 Gimnasio Principal</li>
+            <li class="slide-item">5 Gimnasios Adicionales</li>
+            <li class="slide-item">16 tokens de acceso a los gyms adicionales</li>
+          </ul>
+          <ion-button class="contract-button">Contratar</ion-button>
+        </div>
+      </div>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>
-
