@@ -4,7 +4,7 @@
   <!-- Tarjeta de Plan Básico -->
   <ion-card class="ion-margin-top">
     <ion-card-header>
-      <ion-card-title class="Plan">{{userData.planNombre}}</ion-card-title>
+      <ion-card-title class="Plan"><strong>{{userData.planNombre}}</strong></ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -21,8 +21,12 @@
         <span class="info-value">{{userData.sigCobro}}</span>
       </div>
       <div class="plan-info">
-        <span>Tarjetas de Pago</span>
-        <span class="info-value">Visa {{userData.tarjeta}}</span>
+        <span>Gimnasio Principal</span>
+        <span class="info-value">{{userData.gp}}</span>
+      </div>
+      <div class="plan-info">
+        <span>Gimnasios Adicionales</span>
+        <span class="info-value">{{userData.ga}}</span>
       </div>
     </ion-card-content>
 

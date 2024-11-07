@@ -23,7 +23,7 @@ export class AddUpdateRutinasComponent implements OnInit {
 
   form = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
     nota: new FormControl(''),
     checked: new FormControl(false), // Checkbox para el estado de la rutina
     date: new FormControl(new Date().toISOString().slice(0, 10), [Validators.required]) // Campo de fecha

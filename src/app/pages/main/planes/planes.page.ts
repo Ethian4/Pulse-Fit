@@ -55,52 +55,58 @@ export class PlanesPage implements OnInit {
     try {
       // Iniciar el proceso de pago con PayPal
       const paymentData = await this.paypalService.createPayment(plan);
-
+  
+      // Verificar si paymentData tiene la estructura esperada
+      console.log(paymentData); // Esto te ayudará a ver qué contiene paymentData
+  
+      // Comprobar si los últimos 4 dígitos están disponibles
+      let last4Digits = '';
+      if (paymentData.card && paymentData.card.last4) {
+        last4Digits = paymentData.card.last4;
+      } else {
+        console.error('No se encontraron los últimos 4 dígitos de la tarjeta');
+        // Opcional: Manejar el caso en que los últimos 4 dígitos no estén disponibles
+      }
+  
       // Si el pago fue exitoso
       if (paymentData) {
-        // Aquí se actualizan los datos del usuario con los valores del plan seleccionado
-
-        
-
         const updatedUser: User = { ...this.user };
-
+  
         updatedUser.planNombre = plan.name;
         updatedUser.cargoMensual = plan.price;
         updatedUser.tokens = plan.tokens;
         updatedUser.gp = plan.gyms;
         updatedUser.ga = plan.additionalGyms;
-
+  
         const today = new Date();
-
-        // Crear una nueva fecha para el próximo cobro
-        let nextChargeDate = new Date(today); // Usar la fecha actual
-  
-        // Ajustar la fecha de cobro según la duración del plan
+        let nextChargeDate = new Date(today);
         if (plan.duration.includes('Mensual')) {
-          nextChargeDate.setMonth(today.getMonth() + 1); // Pago mensual, sumar 1 mes
+          nextChargeDate.setMonth(today.getMonth() + 1);
         } else if (plan.duration.includes('3 Meses')) {
-          nextChargeDate.setMonth(today.getMonth() + 3); // Pago por 3 meses, sumar 3 meses
+          nextChargeDate.setMonth(today.getMonth() + 3);
         }
+        const formattedDate = `${nextChargeDate.getFullYear()}-${String(nextChargeDate.getMonth() + 1).padStart(2, '0')}-${String(nextChargeDate.getDate()).padStart(2, '0')}`;
   
-        // Formatear la fecha para solo incluir año/mes/día
-        const year = nextChargeDate.getFullYear();
-        const month = String(nextChargeDate.getMonth() + 1).padStart(2, '0'); 
-        const day = String(nextChargeDate.getDate()).padStart(2, '0');
-        const formattedDate = `${year}-${month}-${day}`;
-        // Actualiza el documento del usuario en Firebase
+        const transactionDetails = {
+          transactionId: paymentData.id,
+          amount: plan.price,
+          paymentDate: formattedDate,
+          cardLast4Digits: last4Digits, // Usar los últimos 4 dígitos si están disponibles
+          paymentStatus: paymentData.status,
+          paymentMethod: paymentData.payer.payment_method,
+        };
+  
         await this.firebaseSvc.updateDocument(`users/${this.user.uid}`, updatedUser);
-
-        // Muestra el mensaje de éxito
+        await this.firebaseSvc.addDocument(`users/${this.user.uid}/transactions`, transactionDetails);
+  
         this.utilsSvc.presentToast({
           message: 'Pago realizado con éxito',
           duration: 1500,
           color: 'success',
           position: 'middle',
         });
-
-        // Redirige a la página principal o de inicio
-        this.router.navigate(['/main/payment']); // Puedes cambiar la ruta de acuerdo a tu flujo
-
+  
+        this.router.navigate(['/main/payment']);
       }
     } catch (error) {
       console.error('Error al iniciar el pago:', error);
