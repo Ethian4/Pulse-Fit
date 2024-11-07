@@ -23,7 +23,8 @@
             (click)="selectPlan(plan)" 
             [disabled]="isProcessing" 
             *ngIf="!isProcessing">
-            Contratar
+            <!-- Si el plan seleccionado es el que el usuario ya tiene, muestra "Ya tienes este plan" -->
+            {{ user.planNombre === plan.name ? 'Ya tienes este plan' : 'Contratar' }}
           </ion-button>
         </div>
       </div>

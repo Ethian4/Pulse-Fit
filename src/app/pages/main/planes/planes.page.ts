@@ -17,6 +17,7 @@ export class PlanesPage implements OnInit {
   user: User = {} as User;
   selectedPlan: any;
   isProcessing: boolean = false; // Flag para controlar el estado de procesamiento de la compra
+  isPlanDisabled: boolean = false; // Variable para controlar el estado de deshabilitación del botón
   
  constructor(
     private navController: NavController,
@@ -32,11 +33,25 @@ export class PlanesPage implements OnInit {
   }
 
   selectPlan(plan: any) {
+    // Si el usuario ya tiene este plan, no proceder al pago
+    if (this.user.planNombre === plan.name) {
+      this.isPlanDisabled = true; // Deshabilitar el botón
+      this.utilsSvc.presentToast({
+        message: 'Ya tienes este plan.',
+        duration: 1500,
+        color: 'success',
+        position: 'middle',
+      });
+      return; // Detener el proceso si el usuario ya tiene el plan
+    }
+
     this.selectedPlan = plan;
+    this.isPlanDisabled = false; // Habilitar el botón si el usuario no tiene este plan
     this.startPaymentProcess(plan);
   }
 
   async startPaymentProcess(plan: any) {
+    this.isProcessing = true; // Activar el estado de procesamiento
     try {
       // Iniciar el proceso de pago con PayPal
       const paymentData = await this.paypalService.createPayment(plan);
@@ -44,6 +59,9 @@ export class PlanesPage implements OnInit {
       // Si el pago fue exitoso
       if (paymentData) {
         // Aquí se actualizan los datos del usuario con los valores del plan seleccionado
+
+        
+
         const updatedUser: User = { ...this.user };
 
         updatedUser.planNombre = plan.name;
@@ -53,14 +71,22 @@ export class PlanesPage implements OnInit {
         updatedUser.ga = plan.additionalGyms;
 
         const today = new Date();
-        let nextChargeDate = new Date(today);
-        if (plan.duration.includes('Mes')) {
-          nextChargeDate.setMonth(today.getMonth() + 1); // Pago mensual
-        } else if (plan.duration.includes('3 Meses')) {
-          nextChargeDate.setMonth(today.getMonth() + 3); // Pago por 3 meses
-        }
-        updatedUser.sigCobro = nextChargeDate.toISOString(); // Fecha del próximo cobro
 
+        // Crear una nueva fecha para el próximo cobro
+        let nextChargeDate = new Date(today); // Usar la fecha actual
+  
+        // Ajustar la fecha de cobro según la duración del plan
+        if (plan.duration.includes('Mensual')) {
+          nextChargeDate.setMonth(today.getMonth() + 1); // Pago mensual, sumar 1 mes
+        } else if (plan.duration.includes('3 Meses')) {
+          nextChargeDate.setMonth(today.getMonth() + 3); // Pago por 3 meses, sumar 3 meses
+        }
+  
+        // Formatear la fecha para solo incluir año/mes/día
+        const year = nextChargeDate.getFullYear();
+        const month = String(nextChargeDate.getMonth() + 1).padStart(2, '0'); 
+        const day = String(nextChargeDate.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
         // Actualiza el documento del usuario en Firebase
         await this.firebaseSvc.updateDocument(`users/${this.user.uid}`, updatedUser);
 
