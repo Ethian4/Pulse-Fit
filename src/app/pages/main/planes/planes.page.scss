@@ -143,15 +143,20 @@
 
 
 
-
-/* Asegurarse de que el contenedor de PayPal no toque los bordes */
+/* Estilo del contenedor del botón PayPal */
 .paypal-button-container {
-  padding: 10px; /* Espaciado alrededor del contenedor */
-  margin: 0 auto; /* Centrar el contenedor */
-  max-width: 600px; /* Limitar el ancho máximo */
+  margin: 16px 0; /* Espaciado arriba y abajo del botón */
+  padding: 10px; /* Espaciado interno para que no toque los bordes */
+  border-radius: 5px; /* Esquinas redondeadas para el borde */
 }
 
-/* Opcional: Ajustar el tamaño de la imagen y otros elementos si es necesario */
-.swiper-container {
-  margin-bottom: 20px;
+/* Estilo adicional para asegurar que el contenido del botón no toque los bordes */
+.paypal-button-container .paypal-button {
+  padding: 0; /* Evitar padding extra en el botón de PayPal */
+  width: 100%; /* Asegurar que ocupe todo el ancho disponible */
+}
+
+/* Asegurar que el iframe de PayPal también tenga márgenes dentro */
+.paypal-button-container iframe {
+  margin: 0; /* Eliminar cualquier margen por defecto */
 }

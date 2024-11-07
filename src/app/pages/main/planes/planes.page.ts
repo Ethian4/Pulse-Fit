@@ -16,7 +16,8 @@ export class PlanesPage implements OnInit {
 
   user: User = {} as User;
   selectedPlan: any;
-
+  isProcessing: boolean = false; // Flag para controlar el estado de procesamiento de la compra
+  
  constructor(
     private navController: NavController,
     private firebaseSvc: FirebaseService,
@@ -39,24 +40,41 @@ export class PlanesPage implements OnInit {
     try {
       // Iniciar el proceso de pago con PayPal
       const paymentData = await this.paypalService.createPayment(plan);
-      
-      // El SDK de PayPal ya maneja la creación del pago y la ejecución.
-      // Si el pago fue aprobado, el SDK de PayPal invoca onApprove y maneja la captura.
+
+      // Si el pago fue exitoso
       if (paymentData) {
-        // Aquí puedes procesar la información de pago recibida, si es necesario
+        // Aquí se actualizan los datos del usuario con los valores del plan seleccionado
+        const updatedUser: User = { ...this.user };
+
+        updatedUser.planNombre = plan.name;
+        updatedUser.cargoMensual = plan.price;
+        updatedUser.tokens = plan.tokens;
+        updatedUser.gp = plan.gyms;
+        updatedUser.ga = plan.additionalGyms;
+
+        const today = new Date();
+        let nextChargeDate = new Date(today);
+        if (plan.duration.includes('Mes')) {
+          nextChargeDate.setMonth(today.getMonth() + 1); // Pago mensual
+        } else if (plan.duration.includes('3 Meses')) {
+          nextChargeDate.setMonth(today.getMonth() + 3); // Pago por 3 meses
+        }
+        updatedUser.sigCobro = nextChargeDate.toISOString(); // Fecha del próximo cobro
+
+        // Actualiza el documento del usuario en Firebase
+        await this.firebaseSvc.updateDocument(`users/${this.user.uid}`, updatedUser);
+
+        // Muestra el mensaje de éxito
         this.utilsSvc.presentToast({
           message: 'Pago realizado con éxito',
           duration: 1500,
           color: 'success',
           position: 'middle',
-
-
-          
-
-
-
         });
-        this.router.navigate(['/main/payment']); // O cualquier ruta después de un pago exitoso
+
+        // Redirige a la página principal o de inicio
+        this.router.navigate(['/main/payment']); // Puedes cambiar la ruta de acuerdo a tu flujo
+
       }
     } catch (error) {
       console.error('Error al iniciar el pago:', error);

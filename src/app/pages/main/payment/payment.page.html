@@ -1,36 +1,35 @@
 <ion-content class="ion-padding-top ion-text-center">
   <h1 class="title-left"><strong>Tu Plan</strong></h1>
-  
+
   <!-- Tarjeta de Plan Básico -->
   <ion-card class="ion-margin-top">
     <ion-card-header>
-      <ion-card-title class="Plan">Plan Básico</ion-card-title>
+      <ion-card-title class="Plan">{{userData.planNombre}}</ion-card-title>
     </ion-card-header>
-  
+
     <ion-card-content>
       <div class="plan-info">
         <span>Cargo Mensual</span>
-        <span class="info-value">{{user().cargoMensual}} MXN</span> 
+        <span class="info-value">{{userData.cargoMensual}} MXN</span>
       </div>
       <div class="plan-info">
         <span>Tokens Disponibles</span>
-        <span class="info-value">{{user().tokens}}</span> 
+        <span class="info-value">{{userData.tokens}}</span>
       </div>
       <div class="plan-info">
         <span>Siguiente Cobro</span>
-        <span class="info-value">{{user().sigCobro}}</span> 
+        <span class="info-value">{{userData.sigCobro}}</span>
       </div>
       <div class="plan-info">
         <span>Tarjetas de Pago</span>
-        <span class="info-value">Visa {{user().tarjeta}}</span> 
+        <span class="info-value">Visa {{userData.tarjeta}}</span>
       </div>
     </ion-card-content>
 
     <div class="button-container">
       <ion-button routerLink="/main/planes" class="ColorVerde custom-button">
-        <strong routerLink="/main/planes" >Mejora tu Plan</strong>
+        <strong>Mejora tu Plan</strong>
       </ion-button>
     </div>
-    
   </ion-card>
 </ion-content>

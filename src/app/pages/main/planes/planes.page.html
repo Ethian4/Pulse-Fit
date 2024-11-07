@@ -18,7 +18,11 @@
             <li class="slide-item">{{ plan.additionalGyms }} Gimnasios Adicionales</li>
             <li class="slide-item">{{ plan.tokens }} tokens</li>
           </ul>
-          <ion-button class="contract-button" (click)="selectPlan(plan)">
+          <ion-button 
+            class="contract-button" 
+            (click)="selectPlan(plan)" 
+            [disabled]="isProcessing" 
+            *ngIf="!isProcessing">
             Contratar
           </ion-button>
         </div>
@@ -27,5 +31,5 @@
   </swiper-container>
 
   <!-- Contenedor del botón PayPal (solo aparecerá cuando se seleccione un plan) -->
-  <div id="paypal-button-container"></div>
+  <div id="paypal-button-container" class="paypal-button-container"></div>
 </ion-content>
