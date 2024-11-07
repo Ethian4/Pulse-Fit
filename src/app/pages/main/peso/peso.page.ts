@@ -30,8 +30,14 @@ export class PesoPage implements OnInit {
     if (this.form.valid) {
       const peso = this.form.value.peso;
       const user: User = this.utilsSvc.getFromLocalStorage('user') || {};
+      
+      console.log("Guardando peso: ", peso); // Verifica el valor del peso
+
       user.peso = peso; // Guardar el peso en la variable del usuario
       this.utilsSvc.saveInLocalStorage('user', user); // Actualizar en localStorage
+      
+      console.log("Usuario actualizado en LocalStorage:", user); // Verifica si el usuario se actualiza correctamente
+      
       this.utilsSvc.routerLink('/main/altura'); // Navegar a la siguiente página
     } else {
       this.utilsSvc.presentToast({
@@ -40,5 +46,5 @@ export class PesoPage implements OnInit {
         color: 'warning',
       });
     }
-  }
+}
 }
