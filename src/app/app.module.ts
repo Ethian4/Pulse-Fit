@@ -2,7 +2,7 @@ import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
@@ -21,7 +21,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    
     BrowserModule,
+    HttpClientModule, // Asegúrate de agregar esto
     ReactiveFormsModule,
     IonicModule,  // Agrega esta línea
     IonicModule.forRoot({ mode: 'md' }),

@@ -140,3 +140,18 @@
   /* Alinea el texto a la izquierda */
   line-height: 1.5;
 }
+
+
+
+
+/* Asegurarse de que el contenedor de PayPal no toque los bordes */
+.paypal-button-container {
+  padding: 10px; /* Espaciado alrededor del contenedor */
+  margin: 0 auto; /* Centrar el contenedor */
+  max-width: 600px; /* Limitar el ancho máximo */
+}
+
+/* Opcional: Ajustar el tamaño de la imagen y otros elementos si es necesario */
+.swiper-container {
+  margin-bottom: 20px;
+}

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { NavController } from '@ionic/angular'; // Importar NavController
+import { PayPalService} from 'src/app/services/paypal.service';
+import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-planes',
@@ -10,83 +13,93 @@ import { NavController } from '@ionic/angular'; // Importar NavController
   styleUrls: ['./planes.page.scss'],
 })
 export class PlanesPage implements OnInit {
-  userId: string;  // Definir userId
-  planSeleccionado: string;
 
-  constructor(
+  user: User = {} as User;
+  selectedPlan: any;
+
+ constructor(
+    private navController: NavController,
     private firebaseSvc: FirebaseService,
     private utilsSvc: UtilsService,
-    private afAuth: AngularFireAuth,  // Servicio para obtener usuario autenticado
-    private navCtrl: NavController  // Inyectar NavController
+    private router: Router,
+    private paypalService: PayPalService
   ) {}
 
   ngOnInit() {
-    // Obtén el UID del usuario autenticado
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.userId = user.uid; // Asigna el UID a userId
-      } else {
-        console.log('No hay usuario autenticado');
-      }
-    });
+    // Obtener datos del usuario
+    this.user = this.utilsSvc.getFromLocalStorage('user');
   }
 
-  async contratarPlan(planName: string) {
-    if (!this.userId) {
-      console.error('No se ha encontrado un usuario autenticado');
-      this.utilsSvc.presentToast({
-        message: 'Por favor inicia sesión para contratar un plan.',
-        duration: 2000,
-        color: 'warning',
-        position: 'middle',
-        icon: 'alert-circle-outline',
-      });
-      return;
-    }
+  selectPlan(plan: any) {
+    this.selectedPlan = plan;
+    this.startPaymentProcess(plan);
+  }
 
+  async startPaymentProcess(plan: any) {
     try {
-      // Verifica si el documento del usuario existe
-      const userDoc = await this.firebaseSvc.getDocument(`users/${this.userId}`);
+      // Iniciar el proceso de pago con PayPal
+      const paymentData = await this.paypalService.createPayment(plan);
+      
+      // El SDK de PayPal ya maneja la creación del pago y la ejecución.
+      // Si el pago fue aprobado, el SDK de PayPal invoca onApprove y maneja la captura.
+      if (paymentData) {
+        // Aquí puedes procesar la información de pago recibida, si es necesario
+        this.utilsSvc.presentToast({
+          message: 'Pago realizado con éxito',
+          duration: 1500,
+          color: 'success',
+          position: 'middle',
 
-      if (!userDoc) {
-        // Si no existe, crea el documento con datos básicos
-        const newUser = {
-          uid: this.userId,
-          name: 'Usuario Ejemplo', // Coloca los datos correctos aquí
-          email: 'usuario@example.com',
-          planNombre: planName,
-          // Otros campos pueden ser necesarios según tu modelo
-        };
-        await this.firebaseSvc.addDocument(`users/${this.userId}`, newUser);
-        console.log('Documento de usuario creado con éxito');
-      } else {
-        // Si existe, actualiza el documento
-        await this.firebaseSvc.updateDocument(`users/${this.userId}`, { planNombre: planName });
-        console.log('Plan contratado con éxito');
+
+          
+
+
+
+        });
+        this.router.navigate(['/main/payment']); // O cualquier ruta después de un pago exitoso
       }
-
-      // Muestra un mensaje de éxito
-      this.utilsSvc.presentToast({
-        message: 'Plan contratado con éxito',
-        duration: 1500,
-        color: 'success',
-        position: 'middle',
-        icon: 'checkmark-circle-outline',
-      });
     } catch (error) {
-      console.error('Error al contratar el plan:', error);
+      console.error('Error al iniciar el pago:', error);
       this.utilsSvc.presentToast({
-        message: 'Error al contratar el plan: ' + error.message,
-        duration: 2500,
+        message: 'Hubo un problema al iniciar el pago.',
+        duration: 1500,
         color: 'danger',
         position: 'middle',
-        icon: 'alert-circle-outline',
       });
     }
   }
 
-  // Método para retroceder a la pantalla anterior
+  planes = [
+    {
+      name: 'Nuevo Usuario',
+      duration: '(3 Meses)',
+      price: 1,
+      gyms: 1,
+      additionalGyms: 2,
+      tokens: 8,
+      image: 'assets/icon/Imagen1.png',
+    },
+    {
+      name: 'Pulse Básico',
+      duration: '(Mensual)',
+      price: 2,
+      gyms: 1,
+      additionalGyms: 3,
+      tokens: 12,
+      image: 'assets/icon/Imagen2.png',
+    },
+    {
+      name: 'Pulse Premium',
+      duration: '(Mensual)',
+      price: 3,
+      gyms: 1,
+      additionalGyms: 5,
+      tokens: 16,
+      image: 'assets/icon/Imagen3.png',
+    },
+  ];
+
   goBack() {
-    this.navCtrl.back();  // Usa NavController para navegar hacia atrás
+    this.navController.back();
   }
 }

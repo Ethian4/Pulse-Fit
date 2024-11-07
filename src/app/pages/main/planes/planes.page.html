@@ -6,58 +6,26 @@
   <p>Selecciona tu plan</p>
 
   <swiper-container class="custom-swiper">
-    <!-- Primer plan -->
-    <swiper-slide>
+    <swiper-slide *ngFor="let plan of planes">
       <div class="slide-content">
-        <img src="assets/icon/Imagen1.png" alt="Imagen 1" class="background-image">
+        <img [src]="plan.image" alt="Imagen de Plan" class="background-image">
         <div class="overlay">
-          <h2><strong>Nuevos Usuarios</strong></h2>
-          <h2 class="slide-title">(3 Meses)</h2>
+          <h2><strong>{{ plan.name }}</strong></h2>
+          <h2 class="slide-title">{{ plan.duration }}</h2>
           <ul class="slide-list">
-            <li class="slide-item">$1500 MXN un solo pago</li>
-            <li class="slide-item">1 Gimnasio Principal</li>
-            <li class="slide-item">2 Gimnasios Adicionales</li>
-            <li class="slide-item">8 tokens de acceso a los gyms adicionales</li>
+            <li class="slide-item">{{ plan.price }} MXN un solo pago</li>
+            <li class="slide-item">{{ plan.gyms }} Gimnasio Principal</li>
+            <li class="slide-item">{{ plan.additionalGyms }} Gimnasios Adicionales</li>
+            <li class="slide-item">{{ plan.tokens }} tokens</li>
           </ul>
-          <ion-button class="contract-button" (click)="contratarPlan('Nuevos Usuarios')">Contratar</ion-button>
-        </div>
-      </div>
-    </swiper-slide>
-
-    <!-- Segundo plan -->
-    <swiper-slide>
-      <div class="slide-content">
-        <img src="assets/icon/Imagen2.png" alt="Imagen 2" class="background-image">
-        <div class="overlay">
-          <h2 class="slide-title">Pulse Basico</h2>
-          <ul class="slide-list">
-            <li class="slide-item">$800 MXN un solo pago</li>
-            <li class="slide-item">Suscripción mensual</li>
-            <li class="slide-item">1 Gimnasio Principal</li>
-            <li class="slide-item">3 Gimnasios Adicionales</li>
-            <li class="slide-item">12 tokens de acceso a los gyms adicionales</li>
-          </ul>
-          <ion-button class="contract-button" (click)="contratarPlan('Pulse Basico')">Contratar</ion-button>
-        </div>
-      </div>
-    </swiper-slide>
-
-    <!-- Tercer plan -->
-    <swiper-slide>
-      <div class="slide-content">
-        <img src="assets/icon/Imagen3.png" alt="Imagen 3" class="background-image">
-        <div class="overlay">
-          <h2 class="slide-title">Pulse Premium</h2>
-          <ul class="slide-list">
-            <li class="slide-item">$1200 MXN un solo pago</li>
-            <li class="slide-item">Suscripción mensual</li>
-            <li class="slide-item">1 Gimnasio Principal</li>
-            <li class="slide-item">5 Gimnasios Adicionales</li>
-            <li class="slide-item">16 tokens de acceso a los gyms adicionales</li>
-          </ul>
-          <ion-button class="contract-button" (click)="contratarPlan('Pulse Premium')">Contratar</ion-button>
+          <ion-button class="contract-button" (click)="selectPlan(plan)">
+            Contratar
+          </ion-button>
         </div>
       </div>
     </swiper-slide>
   </swiper-container>
+
+  <!-- Contenedor del botón PayPal (solo aparecerá cuando se seleccione un plan) -->
+  <div id="paypal-button-container"></div>
 </ion-content>

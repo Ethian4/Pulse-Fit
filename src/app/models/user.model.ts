@@ -12,13 +12,17 @@ export interface User{
     altura: number,
     genero: string,
     edad: number,
+    rutinasCompletadas: number,
+
+
     cargoMensual: number,
     tokens: number,
     sigCobro: string,
     tarjeta: number,
-    rutinasCompletadas: number,
-    qr: string,
     planNombre: string,
     ga: number,
     gp: number,
+
+    qr: string,
 }
+
