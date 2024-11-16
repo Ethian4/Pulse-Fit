@@ -4,16 +4,15 @@ ion-item {
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
-
-  display: flex; // Hacer que el ion-item use flexbox
-  align-items: center; // Alinear verticalmente
-
+  display: flex;
+  align-items: center;
+  
   .circle-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-
+    
     .donut-chart {
       width: 100px; // Cambia según necesites
       height: 100px; // Cambia según necesites
@@ -26,40 +25,39 @@ ion-item {
       align-items: center;
       justify-content: center;
 
-      // Crea el círculo interior vacío
       &::before {
         content: '';
         position: absolute;
-        top: 15%; // Ajusta según sea necesario para el tamaño del agujero
-        left: 15%; // Ajusta según sea necesario para el tamaño del agujero
-        width: 70%; // Tamaño del agujero
-        height: 70%; // Tamaño del agujero
+        top: 15%;
+        left: 15%;
+        width: 70%;
+        height: 70%;
         border-radius: 50%;
-        background: white; // Color del centro
-        z-index: 1; // Asegúrate de que esté por encima del gráfico
+        background: white;
+        z-index: 1;
       }
     }
 
     .percentage-text {
       position: absolute;
-      top: 50%; // Centrar verticalmente
-      left: 50%; // Centrar horizontalmente
-      transform: translate(-50%, -50%); // Ajuste para centrar el texto
-      font-size: 20px; // Aumenta el tamaño de la fuente
-      color: #71A71A; // Cambiar el color del texto
-      font-weight: bold; // Añade negrita para destacar
-      z-index: 2; // Asegúrate de que esté por encima del agujero
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: #71A71A;
+      font-weight: bold;
+      z-index: 2;
     }
   }
 
   .routine-info {
-    margin-left: 20px; // Espacio entre el círculo y la información
-    color: #71A71A; // Cambiar el color del texto
-    text-align: left; // Alinear el texto a la izquierda
+    margin-left: 20px;
+    color: #71A71A;
+    text-align: left;
 
     .routine-item {
-      font-size: 14px; // Ajusta el tamaño según sea necesario
-      color: #000000; // Asegurarse de que el color sea el mismo
+      font-size: 14px;
+      color: #000000;
     }
   }
 }
@@ -70,5 +68,19 @@ ion-label {
   margin-bottom: 10px; /* Espacio entre el título y el QR */
 }
 
+/* Modificar el contenedor del QR */
+.qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centra el QR */
+  width: 100%;
+  height: 100%; /* Asegura que ocupe todo el espacio disponible */
+  padding: 20px 0;
 
-
+  ion-img {
+    width: 250px !important; /* Establece un tamaño mayor para el QR */
+    height: 250px !important; /* Asegura que la imagen tenga el mismo tamaño de altura */
+    object-fit: contain; /* Asegura que la imagen mantenga su relación de aspecto */
+  }
+}

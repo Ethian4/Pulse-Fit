@@ -16,9 +16,17 @@ export class DatosPage implements OnInit {
 
   constructor(private location: Location) {}
 
+  userData: User;
+
   ngOnInit() {
+    this.loadUserData();
   }
 
+  loadUserData() {
+    this.userData = this.utilsSvc.getFromLocalStorage('user');
+    console.log('Datos del usuario:', this.userData); // Verificar en consola
+  }
+  
   user(): User {
     return this.utilsSvc.getFromLocalStorage('user');
   }
@@ -28,3 +36,4 @@ export class DatosPage implements OnInit {
   }
 
 }
+

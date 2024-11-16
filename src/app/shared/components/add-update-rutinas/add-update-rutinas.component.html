@@ -3,39 +3,63 @@
   <form [formGroup]="form" class="ion-no-padding ion-text-center auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
 
     <!-- NAME -->
-    <app-custom-input autocomplete="name" [control]="form.controls.name" type="text" label="Nombre"></app-custom-input>
-
+     
+    <ion-item class="wide-item" lines="none">
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      <app-custom-input
+        autocomplete="name"
+        [control]="form.controls.name"
+        type="text"
+        label="Nombre"
+      ></app-custom-input>
+    </ion-item>
+    
     <!-- Nota -->
-    <app-custom-input [control]="form.controls.nota" type="text" label="Nota"></app-custom-input>
+    <ion-item class="wide-item" lines="none">
+      <ion-icon slot="start" name="document-text-outline"></ion-icon>
+      <app-custom-input
+        [control]="form.controls.nota"
+        type="text"
+        label="Nota"
+      ></app-custom-input>
+    </ion-item>
+    
 
     <!-- Fecha -->
     <ion-item button (click)="openDatePicker()">
+      <ion-icon slot="start" name="calendar-outline"></ion-icon>
       <ion-label>Fecha</ion-label>
       <ion-text>{{ form.value.date || 'Selecciona un Dia' }}</ion-text>
     </ion-item>
 
     <ion-modal #datePicker>
       <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Selecciona un Dia</ion-title>
+        <!-- Encabezado del modal -->
+        <ion-header translucent>
+          <ion-toolbar color="primary">
+            <ion-title class="modal-title">Selecciona un Día</ion-title>
             <ion-buttons slot="end">
-              <ion-button (click)="closeDatePicker()">Cancelar</ion-button>
+              <ion-button color="light" (click)="closeDatePicker()">Cancelar</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
-
-        <ion-content>
-          <ion-datetime
-            (ionChange)="setDate($event)"
-            presentation="Fecha"
-            cancelText="Cancelar"
-            doneText="Confirmar"
-            show-default-buttons="true"
-          ></ion-datetime>
+    
+        <!-- Contenido del modal -->
+        <ion-content class="modal-content">
+          <div class="datetime-wrapper">
+            <ion-datetime
+              (ionChange)="setDate($event)"
+              presentation="date"
+              cancelText="Cancelar"
+              doneText="Confirmar"
+              show-default-buttons="true"
+            ></ion-datetime>
+          </div>
         </ion-content>
       </ng-template>
     </ion-modal>
+    
+    
 
     <!-- EJERCICIO LISTA -->
     <ion-list>
@@ -43,9 +67,12 @@
         <ion-item>
           <ion-label>
             <div class="name">{{ e.nameE }}</div>
-            <div>Peso: {{ e.pesoE }} kg</div>
-            <div>Tiempo: {{ e.tiempoE }} min</div>
-            <div>Repeticiones: {{ e.repeticionesE }}</div>
+
+            <div>Peso: <span *ngIf="e.pesoE">{{ e.pesoE }} kg</span><span *ngIf="!e.pesoE">-</span></div>
+
+            <div>Tiempo: <span *ngIf="e.tiempoE">{{ e.tiempoE }} min</span><span *ngIf="!e.tiempoE">-</span></div>
+
+            <div>Repeticiones: <span *ngIf="e.repeticionesE">{{ e.repeticionesE }}</span><span *ngIf="!e.repeticionesE">-</span></div>
           </ion-label>
           <ion-checkbox slot="start" [checked]="e.checkedE" (ionChange)="updateCheckedState(e, $event.detail.checked)"></ion-checkbox>
           <ion-button color="danger" (click)="deleteEjercicio(e)">

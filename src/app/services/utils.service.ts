@@ -55,7 +55,9 @@ export class UtilsService {
 
   //Obtener cosas del localstorage
   getFromLocalStorage(key: string) {
-    return JSON.parse(localStorage.getItem(key));
+    const data = JSON.parse(localStorage.getItem(key));
+    console.log('Datos del usuario desde localStorage:', data); 
+    return data;
   }
 
 

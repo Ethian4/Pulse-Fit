@@ -117,7 +117,7 @@ export class PlanesPage implements OnInit {
     {
       name: 'Nuevo Usuario',
       duration: '(3 Meses)',
-      price: 1,
+      price: 1500,
       gyms: 1,
       additionalGyms: 2,
       tokens: 8,
@@ -126,7 +126,7 @@ export class PlanesPage implements OnInit {
     {
       name: 'Pulse Básico',
       duration: '(Mensual)',
-      price: 2,
+      price: 800,
       gyms: 1,
       additionalGyms: 3,
       tokens: 12,
@@ -135,7 +135,7 @@ export class PlanesPage implements OnInit {
     {
       name: 'Pulse Premium',
       duration: '(Mensual)',
-      price: 3,
+      price: 1200,
       gyms: 1,
       additionalGyms: 5,
       tokens: 16,

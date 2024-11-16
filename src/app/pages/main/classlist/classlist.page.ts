@@ -40,20 +40,32 @@ export class ClasslistPage implements OnInit {
       label: format(addDays(start, i), 'EEE', { locale: es }), // Formato de día en 3 letras en español
       date: addDays(start, i),
     }));
+    console.log('Week Days:', this.weekDays);
   }
+  
 
 
   getRoutineLetter(dayIndex: number): string {
     const currentDate = this.weekDays[dayIndex].date;
-
+  
+    // Sumar un día a la fecha de la rutina
+    const nextDay = addDays(currentDate, 0);
+  
     const rutina = this.Rutinas.find(r => {
       const rutinaDate = new Date(r.date); // Asegúrate de que 'date' sea una propiedad válida en Rutinas
-      return rutinaDate.toDateString() === currentDate.toDateString();
+  
+      // Sumar un día a la fecha de la rutina
+      const nextRutinaDate = addDays(rutinaDate, 1);
+  
+      // Comparar las fechas ajustadas (sumando un día)
+      return nextRutinaDate.toDateString() === nextDay.toDateString();
     });
-
+  
     // Si no hay rutina, devolver un guion "-"
     return rutina ? this.getAlphabetLetter(this.Rutinas.indexOf(rutina)) : '-';
   }
+  
+  
 
 
   // Devuelve el usuario desde el localStorage
@@ -124,6 +136,7 @@ export class ClasslistPage implements OnInit {
     })
 
   }
+
 
   // ACTUALIZAR EL ESTADO DEL CHECKBOX EN FIREBASE
   async onCheckboxChange(rutina: Rutinas) {

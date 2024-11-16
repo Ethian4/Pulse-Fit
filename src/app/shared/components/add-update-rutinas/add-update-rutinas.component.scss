@@ -1,12 +1,16 @@
 .boton-container {
-  /* position: absolute; */ /* Elimina esta línea */
+  /* Eliminamos position absolute para que el contenido se ajuste correctamente */
   margin: 16px 0; /* Ajusta el margen superior e inferior según sea necesario */
   display: flex;
   justify-content: center;
 }
 
 .custom-fab {
-  transform: translate(-10px, -80px); /* Esto puede permanecer igual si necesitas ajustar la posición del FAB */
+  position: fixed;  /* Esto hace que el botón sea flotante y se quede fijo */
+  bottom: 16px;  /* Ajusta la posición desde el fondo de la pantalla */
+  right: 16px;  /* Ajusta la posición desde la derecha */
+  z-index: 1000;  /* Asegura que el botón quede encima de otros elementos */
+  transform: translate(-10px, -80px); /* Mantén el ajuste de la posición si es necesario */
 }
 
 ion-checkbox {
@@ -39,3 +43,42 @@ ion-item {
 ion-list {
   background-color: transparent; /* Quitar el fondo blanco */
 }
+
+
+
+// Estilos para el encabezado
+.modal-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+// Asegura que el ion-datetime esté centrado
+.datetime-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #F5ECEC;
+  border-radius: 0 0 20px 20px;
+}
+
+ion-datetime {
+  --width: 100%;
+  max-width: 320px; /* Ajustar si es necesario */
+  --margin: 0 auto;
+}
+
+.no-custom-input-styles {
+
+  // Resetea todos los estilos para app-custom-input en esta página
+  app-custom-input {
+    all: unset;
+    display: block; // Asegúrate de mantener el layout
+  }
+
+  // También puedes forzar algunos estilos por defecto si es necesario
+  app-custom-input * {
+    all: unset;
+  }
+}
+

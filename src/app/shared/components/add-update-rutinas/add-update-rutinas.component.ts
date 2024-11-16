@@ -26,7 +26,8 @@ export class AddUpdateRutinasComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(1)]),
     nota: new FormControl(''),
     checked: new FormControl(false), // Checkbox para el estado de la rutina
-    date: new FormControl(new Date().toISOString().slice(0, 10), [Validators.required]) // Campo de fecha
+    date: new FormControl(new Date().toLocaleDateString('en-CA'), [Validators.required]) // 'en-CA' es un formato de fecha que da YYYY-MM-DD
+
   });
 
 
@@ -293,8 +294,10 @@ trackByFn(index: number, item: Ejercicios) {
     }
   
     setDate(event: any) {
-      const selectedDate = new Date(event.detail.value).toISOString().split('T')[0]; // Guardar solo la fecha (YYYY-MM-DD)
-      this.form.get('date')?.setValue(selectedDate);
+      const selectedDate = new Date(event.detail.value);
+      const localDate = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000); // Ajuste para la zona horaria local
+      const formattedDate = localDate.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
+      this.form.get('date')?.setValue(formattedDate);
       this.closeDatePicker();
     }
 
