@@ -14,15 +14,12 @@ export class AuthPage implements OnInit {
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
-  })
+  });
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
 
-  ngOnInit() {
-  }
-
-
+  ngOnInit() {}
 
   async submit() {
     if (this.form.valid) {
@@ -30,12 +27,16 @@ export class AuthPage implements OnInit {
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
-      this.firebaseSvc.signIn(this.form.value as User).then(res => {
+      // Solo pasa los campos email y password para la autenticación
+      const credentials = {
+        email: this.form.value.email,
+        password: this.form.value.password
+      };
 
-
-        this.getUserInfo(res.user.uid);
-        
-      }).catch(error =>{
+      this.firebaseSvc.signIn(credentials).then((res) => {
+        // Accede al UID del usuario autenticado
+        this.getUserInfo(res.user.uid); // Pasamos el UID para obtener los datos completos
+      }).catch(error => {
         console.log(error);
 
         this.utilsSvc.presentToast({
@@ -44,56 +45,51 @@ export class AuthPage implements OnInit {
           color: 'primary',
           position: 'middle',
           icon: 'alert-circle-outline'
-        })
+        });
 
-
-      }).finally(() =>{
+      }).finally(() => {
         loading.dismiss();
-      })
+      });
     }
-
   }
-
 
   async getUserInfo(uid: string) {
     if (this.form.valid) {
-
+  
       const loading = await this.utilsSvc.loading();
       await loading.present();
-
-      let path = `users/${uid}`;
-
-      this.firebaseSvc.getDocument(path).then((user: User) => {     // user: user
-        
-        this.utilsSvc.saveInLocalStorage('user', user);
-        this.utilsSvc.routerLink('/main/home');
+  
+      const path = `users/${uid}`; // Ruta de Firestore usando el UID
+  
+      this.firebaseSvc.getDocument(path).then((user: User) => {
+        // Aquí, 'user' es el modelo completo de usuario desde Firestore
+        this.utilsSvc.saveInLocalStorage('user', user); // Guarda el usuario en el almacenamiento local
+        this.utilsSvc.routerLink('/main/home'); // Redirige al inicio
         this.form.reset();
-
+  
         this.utilsSvc.presentToast({
           message: `Bienvenido ${user.name}`,
           duration: 1500,
           color: 'primary',
           position: 'middle',
           icon: 'person-circle-outline'
-        })
-      
-        
-      }).catch(error =>{
+        });
+  
+      }).catch(error => {
         console.log(error);
-
+  
         this.utilsSvc.presentToast({
           message: error.message,
           duration: 2500,
           color: 'primary',
           position: 'middle',
           icon: 'alert-circle-outline'
-        })
-
-
-      }).finally(() =>{
+        });
+  
+      }).finally(() => {
         loading.dismiss();
-      })
+      });
     }
-
   }
+  
 }

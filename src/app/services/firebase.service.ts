@@ -25,9 +25,11 @@ export class FirebaseService {
   }
 
   // ACCEDER
-  signIn(user: User) {
-    return signInWithEmailAndPassword(getAuth(), user.email, user.password);
+  signIn(credentials: { email: string; password: string }) {
+    return this.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
   }
+  
+  
 
   // Registrar
   signUp(user: User) {
