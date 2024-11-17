@@ -22,7 +22,7 @@
   }
 
   ion-item {
-    margin: 10px 15px; /* Ajusta el margen superior e inferior y lateral */
+    margin: 15px 25px; /* Ajusta el margen superior e inferior y lateral */
     border-radius: 10px; /* Bordes redondeados */
     background-color: white; /* Color de fondo opcional */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra opcional */
@@ -67,6 +67,20 @@
     &:hover {
       background-color: #5a5; /* Cambia el color de fondo al pasar el mouse */
       transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+    }
+  }
+  
+  .logout-animation {
+    animation: fadeOut 0.5s ease-out;
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(10px);
     }
   }
   
