@@ -1,39 +1,58 @@
 <ion-content class="ion-padding-top ion-text-center">
   <h1 class="title-left"><strong>Tu Plan</strong></h1>
 
-  <!-- Tarjeta de Plan Básico -->
+  <!-- Tarjeta de Plan -->
   <ion-card class="ion-margin-top">
     <ion-card-header>
       <ion-card-title class="Plan"><strong>{{userData.planNombre}}</strong></ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <div class="plan-info">
-        <span>Cargo Mensual</span>
-        <span class="info-value">{{userData.cargoMensual}} MXN</span>
-      </div>
-      <div class="plan-info">
-        <span>Tokens Disponibles</span>
-        <span class="info-value">{{userData.tokens}}</span>
-      </div>
-      <div class="plan-info">
-        <span>Siguiente Cobro</span>
-        <span class="info-value">{{userData.sigCobro}}</span>
-      </div>
-      <div class="plan-info">
-        <span>Gimnasio Principal</span>
-        <span class="info-value">{{userData.gp}}</span>
-      </div>
-      <div class="plan-info">
-        <span>Gimnasios Adicionales</span>
-        <span class="info-value">{{userData.ga}}</span>
-      </div>
+      <!-- Condición para verificar si el planNombre es "Sin Plan" -->
+      <ng-container *ngIf="userData.planNombre === 'Sin Plan'; else planDetails">
+        <!-- Mostrar mensaje de suscripción si no hay plan -->
+        <div class="plan-info">
+          <span>Suscríbete a un Plan</span>
+        </div>
+        <div class="button-container">
+          <ion-button routerLink="/main/planes" class="ColorVerde custom-button">
+            <strong>Mejora tu Plan</strong>
+          </ion-button>
+        </div>
+      </ng-container>
+
+      <!-- Bloque alternativo: Detalles del plan -->
+      <ng-template #planDetails>
+        <div class="plan-info">
+          <span>Cargo Mensual</span>
+          <span class="info-value">{{userData.cargoMensual}} MXN</span>
+        </div>
+        <div class="plan-info">
+          <span>Tokens Disponibles</span>
+          <span class="info-value">{{userData.tokens}}</span>
+        </div>
+        <div class="plan-info">
+          <span>Siguiente Cobro</span>
+          <span class="info-value">{{userData.sigCobro}}</span>
+        </div>
+        <div class="plan-info">
+          <span>Gimnasio Principal</span>
+          <span class="info-value">{{userData.gp}}</span>
+        </div>
+        <div class="plan-info">
+          <span>Gimnasios Adicionales</span>
+          <span class="info-value">{{userData.ga}}</span>
+        </div>
+      </ng-template>
     </ion-card-content>
 
-    <div class="button-container">
-      <ion-button routerLink="/main/planes" class="ColorVerde custom-button">
+    <!-- Botón de mejora de plan -->
+    <div class="button-container" *ngIf="userData.planNombre !== 'Sin Plan'">
+      <ion-button routerLink="/main/planes" class="custom-button styled-button">
         <strong>Mejora tu Plan</strong>
       </ion-button>
     </div>
+    
+    
   </ion-card>
 </ion-content>

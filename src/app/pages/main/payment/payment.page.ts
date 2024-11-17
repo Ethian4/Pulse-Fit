@@ -42,3 +42,4 @@ export class PaymentPage implements OnInit {
     this.loadUserData(); // Cargar los datos cuando la página sea visitada
   }
 }
+

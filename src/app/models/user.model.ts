@@ -13,8 +13,6 @@ export interface User{
     genero: string,
     edad: number,
     rutinasCompletadas: number,
-
-
     cargoMensual: number,
     tokens: number,
     sigCobro: string,
@@ -22,7 +20,6 @@ export interface User{
     planNombre: string,
     ga: number,
     gp: number,
-
     qr: string,
 }
 
