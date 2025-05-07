@@ -1,5 +1,3 @@
-
-
 ✅ Pulse Fit – Progressive Web App for Gym Membership Management
 Pulse Fit is a Progressive Web Application (PWA) designed to help users manage their gym memberships more easily and flexibly, promoting physical well-being and a better work-life balance.
 
@@ -17,5 +15,3 @@ Languages: HTML, CSS, JavaScript, TypeScript
 Backend & Database: Firebase
 
 Runtime environment: Node.js
-
-
