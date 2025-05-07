@@ -29,3 +29,4 @@ Runtime environment: Node.js
 
 ## Link: https://gym-app-43543.web.app/inicio
 
+## Landing Page: https://pulse-landing-nine.vercel.app/
