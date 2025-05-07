@@ -1,37 +1,21 @@
 ![WhatsApp Image 2025-05-06 at 8 26 53 PM](https://github.com/user-attachments/assets/97db3ed0-d41f-4f83-ae48-1a24a3915d3c)
 
-💪 Pulse Fit
-Pulse Fit is an innovative Progressive Web Application (PWA) designed to revolutionize the way we manage fitness in a fast-paced world. It empowers users to maintain a healthier work-life balance by streamlining gym membership management across a network of local gyms.
+✅ Pulse Fit – Progressive Web App for Gym Membership Management
+Pulse Fit is a Progressive Web Application (PWA) designed to help users manage their gym memberships more easily and flexibly, promoting physical well-being and a better work-life balance.
 
-🌐 About the Project
-In today’s society, time constraints often disrupt personal wellness and limit access to fitness opportunities. Pulse Fit tackles this challenge by offering a flexible, accessible, and user-centric platform that adapts to your lifestyle.
+This platform connects users to a network of local gyms, allowing them to book classes, track workouts, monitor fitness progress, and pay through flexible plans – all in one user-friendly application accessible from both mobile and desktop devices.
 
-✅ Key Features:
+In today’s fast-paced world, time constraints often disrupt personal health goals. Pulse Fit offers a solution by enabling users to train at any partner gym at any time, reducing dependency on a single location and avoiding peak hours.
 
-🏋️ Access multiple local gyms with a single membership
+📌 Technologies Used
+Web framework: Angular
 
-📅 Book classes easily, anytime
+Mobile framework: Ionic
 
-📍 Discover gyms nearby with smart search
+Languages: HTML, CSS, JavaScript, TypeScript
 
-📈 Track workouts and monitor progress
+Backend & Database: Firebase
 
-💳 Enjoy flexible payment options
+Runtime environment: Node.js
 
-📲 Use it on both desktop and mobile devices
 
-No more waiting for machines at peak hours or sticking to just one location. With Pulse Fit, fitness adapts to your schedule, not the other way around.
-
-🛠️ Tech Stack
-🧰 Tool/Technology	🔍 Description
-Backend environment
-Mobile-first UI framework
-Frontend framework
-Markup language
-Styling language
-Logic scripting
-Strongly typed JS
-Auth, DB, hosting
-
-🌟 Vision
-“Our mission is to empower people to lead healthier lives through flexible, accessible fitness solutions that align with modern routines.”
